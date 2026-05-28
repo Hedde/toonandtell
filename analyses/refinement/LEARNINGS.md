@@ -12,6 +12,7 @@
 | 8    | spitsmuis & pad | volledige review-loop + regie-restraint | 5,2 | 3/3 | 81% |
 | **8-bewijs** | **zeekomkommer** | **premisse-eerste motor** | **9,5** | **0/3** | n.v.t. |
 | **8-replicatie** | **zeekomkommer** | idem, tegen 3 *sterke* reals + verse panel | **10,0** | **0/3** | n.v.t. |
+| **9** | **olifant (klassieke dieren)** | premisse-eerst + review-loop + verbeterd per-item-protocol | **9,0** | **0/3** | ~9% AI |
 
 Echte Tellegens scoorden over de meeste tests 8,5-9,5. Twee opvallende uitzonderingen (zie §6): in zowel de bewijs- als de replicatietest wees het hele panel een écht Tellegen-verhaal ten onrechte als AI aan (3,0-5,5), terwijl het AI-verhaal als meest authentiek (#1) werd gerangschikt.
 
@@ -51,6 +52,8 @@ Dit is geen procesfout (alle bestanden inhoudelijk geverifieerd) maar een eigens
 2. **Overgeleerde detectieheuristieken.** De tells die het panel inmiddels hanteert (fysiologische emotie, "talloze gedachten", psychologische glossen als "zijn gedachten die wijzer waren dan hijzelf", aforistische slotgrap) komen werkelijk in Tellegens eigen discursieve verhalen voor. De detector misvuurt daardoor op authentiek werk.
 
 Implicatie: de spectaculaire 0/3-detectie van de zeekomkommer weerspiegelt twee dingen tegelijk — (a) de premisse-eerste motor is echt sterk, reproduceerbaar tegen sterke én canonieke reals, en (b) de detector is te scherp afgesteld en heeft een hoge false-positive-rate op Tellegens psychologische register. Beide zijn waar.
+
+**Bevestigd in blindtest9 (verbeterd per-item-protocol).** Toen de forced-choice werd vervangen door onafhankelijke absolute per-item-oordelen (zie §7), bleef de false-positive bestaan: het panel flagde twee échte Tellegens als AI (vergeetboek 3/3, nu-of-nooit 2/3), terwijl het AI-verhaal (olifant, klassieke dieren, premisse-eerst) unaniem authentiek werd geacht (~9/10, 0/3). De forced-choice was dus niet de enige oorzaak; de detectieheuristieken zelf misvuren op Tellegens geconstrueerde/discursieve middelen. **Context-instabiliteit:** hetzelfde vergeetboek-verhaal kreeg in 7-R3 en 8-bewijs 9/9/9 en "echt/meest authentiek", maar in 9 3/3 "AI" (~3,7) — identieke tekst, tegengesteld oordeel afhankelijk van de set ernaast. Absolute "is dit AI?"-oordelen zijn daarmee aantoonbaar onbetrouwbaar; een zuivere meting vereist controle-items en een ROC-analyse over meer trials.
 
 ## 7. Beter blindtest-protocol (aanbevolen)
 
