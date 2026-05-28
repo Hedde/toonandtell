@@ -54,55 +54,9 @@ De gebruiker, taalanalyticus, formuleerde achtereenvolgens vier opdrachten die s
 
 ---
 
-## 2. Aanpak
+## 2. Aanpak (fase 1-2, beknopt)
 
-### 2.1 Definitie van de persona-agents
-
-Voor elke agent werd online gezocht naar het profiel:
-- *Linguistiek vs. neerlandistiek*: onderscheid tussen taalkundige (taalstructuur) en literair-cultureel afgestudeerde (BA Nederlandse taal en cultuur — UvA, Leiden, UU).
-- *Curriculum*: 180 EC, modules in moderne en oudere letterkunde, taalkunde, taalbeheersing, media; namen van theoretici (Bal, Anbeek, Vaessens) opgenomen in de prompt.
-- *Redacteur-profiel*: 25 jaar ervaring, fonds van het kaliber De Bezige Bij / Querido / Atlas Contact / Van Oorschot; beoordelingsdimensies: authenticiteit, literaire kwaliteit, uitgeefwaardigheid.
-- *Tellegen-fan*: warme, persoonlijke stem; mossel als persoonlijke maatstaf ("De Mossel-Maatstaf").
-
-De vier agents werden gedefinieerd als YAML-frontmatter + Markdown systeemprompt.
-
-### 2.2 Parallelle analyse — 12 specialisten over 4 boeken
-
-De vier PDFs (*Dank je wel*, *Een hart onder de riem*, *Maar niet uit het hart*, *Met hart en ziel*) werden in fase 1 door **12 specialisten parallel** gelezen — drie agents (linguïst, neerlandicus, redacteur) per boek. Output: 12 markdown-analyses, gemiddeld 250-500 regels per stuk.
-
-Hierbij werd één content-filter-trigger geraakt (verbatim verkenning van een specifiek boek) en opnieuw gelanceerd met beknoptere citatie-instructies. Dit leidde tot een blijvende werkwijze: agents lezen voortaan **direct uit de bron-PDF via page-ranges**, niet uit door de hoofdsessie geknipte kopieën — ter voorkoming van auteursrechtelijke verbatim-reproductie. Dit werd vastgelegd in het persistent memory-systeem.
-
-### 2.3 Twee niveaus synthese
-
-- **Per-boek synthese** (fase 2): 4 parallelle neerlandicus-agents integreerden de drie perspectieven per boek tot één coherente teamanalyse (~300 regels per boek).
-- **Cross-boek refinement** (fase 3): één meta-document (~550 regels) identificeerde 15 vier-uit-vier handtekeningen, 5 drie-uit-vier handtekeningen, boek-specifieke kleuringen, een grammatica op micro-/meso-/macro-/metaniveau, 7 doodzondes, een 20-skill-inventaris en model-openingen/sloten/dialogen.
-
-Een eerste poging om dit master-document door één agent te laten schrijven liep op een idle timeout vast; de synthese werd daarna in de hoofdsessie zelf gemaakt op basis van de vier teamsyntheses.
-
-### 2.4 Bouw van de schrijfagent
-
-Op basis van het cross-boek-document werd een **operationele schrijfagent** opgesteld met:
-- grondhouding (filosofische instructie)
-- vaste cast met asymmetrie als motor
-- vier inhoudelijke kleuringen (dankbaarheid / emoties als objecten / afscheid / het feest)
-- skill-inventaris (begon op 20, groeide via tunings naar 27)
-- doodzonden (begon op 7, groeide naar 9)
-- workflow in 5 stappen met expliciete check-vragen (groeide van 5 naar 29)
-
-### 2.5 Iteratieve refinement-loop
-
-Voor elk geproduceerd verhaal werd de driehoek **linguïst + neerlandicus + redacteur** parallel ingezet om de tekst te beoordelen op:
-- de eigen handtekening-criteria
-- detectie van pastiche-signalen
-- concrete tunings-aanbevelingen
-
-Convergerende kritiek werd vervolgens als **chirurgische edit** in de schrijfagent verwerkt. Niet-convergerende kritiek werd terzijde gelegd.
-
-### 2.6 Parallelisatie
-
-Op piekmoment draaiden 12 agents tegelijk. Voor reviews steevast 3 parallel. Synthese-stappen 4 parallel. Dit werd mogelijk door `run_in_background: true` op de Agent-tool, zodat de hoofdsessie haar eigen context-window ongeschonden hield terwijl agents in eigen subprocessen werkten.
-
----
+Vijf persona-agents (linguïst, neerlandicus, redacteur, fan, schrijver), gedefinieerd na online profielonderzoek. De vier bundels werden door 12 specialisten parallel geanalyseerd (3 perspectieven x 4 boeken), per boek gesynthetiseerd en samengevoegd tot één cross-boek-document (`analyses/synthesis/cross_book_refinement.md`: vier-uit-vier-handtekeningen, een grammatica op micro/meso/macro/meta-niveau, doodzondes, skill-inventaris). Daarop is de schrijfagent gebouwd. Reviews liepen via de driehoek linguïst+neerlandicus+redacteur; convergerende kritiek werd als chirurgische edit verwerkt, niet-convergerende terzijde gelegd. Content-filter-werkwijze: agents lezen direct uit de bron-PDF's, geen verbatim kopieën naar nieuwe bestanden. Op piek draaiden 12 agents parallel.
 
 ## 3. Tuning-rondes — chronologie
 
@@ -212,69 +166,9 @@ Een goed georkestreerde meervoudige-agent-pipeline produceert substantieel kwali
 
 ---
 
-## 8. Vervolgsessie (mei 2026)
+## 8. Vervolgsessie — plafond zonder review-loop + literatuurscan (beknopt)
 
-Een latere sessie testte twee aanvullende vragen: (a) blijft het plafond staan zonder de teamreview-revisie-loop, en (b) zijn er literaire/stilometrische methodes uit recent onderzoek die we hebben gemist?
-
-### 8.1 Codex-review (interne pipeline-audit)
-
-Een codex-audit op een eerdere review-revisie-cyclus toonde aan dat **revisie na teamreview de detecteerbaarheid verergert** in plaats van wegneemt: van 6/10 (82% AI) naar 4/10 (85% AI) over twee rondes. De reviewer-feedback wordt door de schrijver te zichtbaar opgevolgd; technische bewustheid stijgt, vanzelfsprekendheid daalt. Aanbeveling: één-shot generatie, geen verplichte review-revisie als default.
-
-### 8.2 Blindtest 5 — reiger & kikker (3 iteraties, één-shot)
-
-Drie onafhankelijke iteraties, drie reviewers, geen review-loop.
-
-| Iter | AI herkend? | Zekerheid | AI-cijfer | Echte verhalen |
-|------|-------------|-----------|-----------|----------------|
-| 1 | ja | 78% | 6,0 | 9,5 + 9,0 |
-| 2 | ja | 88% | 6,0 | 9,0 + 9,0 |
-| 3 | ja | 82% | 6,5 | 9,5 + 9,5 |
-
-3 op 3 herkend, gemiddeld 6,17/10. Concrete tells: markdown-asterisken als scènescheiders (iter 2 en 3), gesloten pseudo-syllogismen, gedeclareerde metafictie ("dit verhaal"), narratorcommentaar op irrelevante bijfiguren.
-
-### 8.3 Literatuurscan
-
-Vier recente bronnen bevestigen het pipeline-plafond als algemeen patroon en wijzen op één concrete techniek die we niet benutten:
-
-- *Beyond the surface: stylometric analysis of GPT-4o's capacity for literary style imitation* (Oxford DSH 2025) — surface yes, Author Multilevel N-gram Profile no.
-- *Catch Me If You Can? — LLMs Still Struggle to Imitate the Implicit Writing Styles of Everyday Authors* (EMNLP 2025) — meer few-shot voorbeelden helpen niet.
-- *Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models* (ICLR 2026) — model-specifieke fraseringen zijn 1000× oververtegenwoordigd; concrete blacklist-aanpak.
-- *Detecting authorship between generative AI models and humans: a Burrows's Delta approach* (Oxford DSH 2025) — AI-teksten clusteren tight; menselijke teksten variëren breed; >80% detectie-accuratesse.
-
-### 8.4 Tuning op basis van literatuur
-
-Drie aanpassingen aan de schrijfagent — geen nieuwe technieken (codex-conform) maar concrete uitsluitingen + procedure:
-- **Asterisk-verbod** (geen `*`/`\*`/`---` als scènescheider — alleen witregels);
-- **Antislop-blacklist** (concrete fraseringen: *zoals X dat doen*, *dit verhaal*, prompt-voorbeelden zoals *schelp op een kier*, *zoethout*, *watertaart*);
-- **Premise-first stap** (interne 2-3 regels achtergrond per personage, niet in tekst — geeft niet-functioneel surplus dat de literatuur als sleutel aanwijst).
-
-### 8.5 Blindtest 6 — mus & ochtend (één-shot, met getunede agent)
-
-| Metric | Waarde |
-|--------|--------|
-| AI herkend? | ja (positie B) |
-| Zekerheid | 82% |
-| AI-cijfer | 6,0 |
-| Echte verhalen-cijfers | 9 + 9 |
-
-De directe verbatim-tells (asterisken, blacklist-fraseringen) waren weg — bevestigd via grep. **De score verschoof niet.** De reviewer wees op nieuwe tells op syntactisch en compositioneel niveau: zelf-verklaarde vondst, overaccumulatie van stijlmarkers, herhaalde epistemische zinsstructuur, structurele symmetrie tussen opening en slot.
-
-### 8.6 Update van het samenvattende beeld
-
-| Blindtest | AI-verhaal | AI-cijfer | AI-detectie |
-|-----------|-----------|-----------|-------------|
-| 1 | Capybara | 7,5 | 85-90% |
-| 2 | Paling | 7,5 | 85% |
-| 3 | Mier-duizendpoot | **8,0** | **35%** (best) |
-| 4 | Ooievaar-kikker | 7,0 | 75-85% |
-| 5 (gem.) | Reiger-kikker | 6,17 | 82,7% |
-| 6 | Mus-ochtend (met blacklist) | 6,0 | 82% |
-
-Het plafond ligt rond 6-8/10. Tunings die binnen prompt-engineering blijven schuiven niet meer.
-
-> **Nuance uit fase 3 (zie §9):** dit gold voor tuning op *zinsniveau*. Een ingreep op de *generatieve startpositie* (premisse-eerst i.p.v. thema-eerst) verschoof de panel-scores wél sterk — al bleek datzelfde panel een onbetrouwbare detector, dus de uitkomst is suggestief, niet bewijzend.
-
----
+Een latere sessie toetste of het plafond standhoudt zónder de review-revisie-loop, en scande recente literatuur. Bevindingen: (a) revisie ná teamreview verergert de detecteerbaarheid (de schrijver volgt feedback te zichtbaar op) — één-shot generatie werkt beter als default; (b) blindtests 5-6 (reiger-kikker, mus-ochtend) bleven 3/3 herkend rond 6/10, ook met een antislop-blacklist en een verbod op markdown-scènescheiders; (c) vier bronnen (zie §11) bevestigen het patroon: surface reproduceerbaar, de diepe stylometrische vingerafdruk niet, en meer few-shot voorbeelden helpen niet. Netto bleef het plafond rond 6-8/10 — wat fase 3 vervolgens herkadert.
 
 ## 9. Fase 3 (mei 2026): het premisse-eerst-effect — en de kritische lezing
 
@@ -300,7 +194,7 @@ Hetzelfde experiment ondermijnt zijn eigen sterke lezing. Vier confounds, van zw
 
 1. **Circulaire beoordeling.** Schrijver én jury zijn hetzelfde modelfamilie (Claude). Een LLM die LLM-output op authenticiteit beoordeelt is vermoedelijk geneigd output die past bij zijn eigen prior als echt te zien. De 0/3 kan grotendeels dáárvan komen.
 2. **Onbetrouwbaar instrument.** Het panel flagde meerdere ECHTE Tellegens als AI (vergeetboek 3/3, "nu of nooit" 2/3) en gaf hetzelfde echte verhaal in verschillende runs tegengestelde oordelen (vergeetboek: eerst 9/9/9 "echt", later 3/3 "AI"). Als het instrument echt-van-echt niet scheidt, is non-detectie van onze AI zwak bewijs.
-3. **Geen stylometrie.** Detectie gebeurde door *lezen en gokken*. De literatuur detecteert AI stylometrisch (Burrows' Delta, AMNP) met >80%, ongeacht leeskwaliteit; dat is hier niet getoetst. "Plafond doorbroken" is in stylometrische zin ongefundeerd.
+3. **Geen stylometrie.** Detectie gebeurde door *lezen en gokken*. De literatuur detecteert AI stylometrisch (Burrows' Delta, AMNP) met >80%, ongeacht leeskwaliteit; dat is hier niet getoetst. "Plafond doorbroken" is in stylometrische zin ongefundeerd. (Inmiddels wél in een pilot gemeten — zie de stylometrie-subsectie hieronder; uitkomst: premisse-eerst komt stylometrisch níét dichterbij.)
 4. **Zwakke opzet.** LLM-persona's i.p.v. menselijke experts; n=3 verhalen; niet-geblindeerde experimentator (dezelfde die ontwierp, koos en interpreteerde, met de hypothese in het hoofd); echte verhalen uit hun boekcontext gehaald en genormaliseerd (nadeel voor de reals).
 
 De verdedigbare conclusie is daarom smal: *binnen deze gebrekkige opzet* gaf premisse-eerst een groot effect op de oordelen van een aantoonbaar onbetrouwbaar LLM-panel. Dat is een bruikbare generatie-strategie-hint en een interessante negatieve bevinding over LLM-detectoren — geen capaciteitsclaim over ononderscheidbaarheid.
@@ -314,6 +208,17 @@ De verdedigbare conclusie is daarom smal: *binnen deze gebrekkige opzet* gaf pre
 
 Het volledige rigoureuze ontwerp — inclusief de model-arm ("komt Claude 4.8 dichterbij, en wat draait het bij?") en de copyright-veilige plagiaat-audit — staat in **`analyses/refinement/PROTOCOL.md`**.
 
+### Stylometrische pilot + fingerprint-in-de-loop (de objectieve maatlat)
+
+Daarna is de eerste twee punten hierboven deels uitgevoerd met een lokale, niet-circulaire harness (`analyses/refinement/stylometry/`): een Burrows'-achtige MFW-Delta + een **held-out** karakter-3-gram-Delta + verbatim-overlap. Vier bevindingen (pilot, kleine n; `stylometry/RESULTS.md`):
+
+- **Premisse-eerst ≈ thema-eerst stylometrisch.** MFW-Delta tot Tellegen: 0,850 vs 0,869 (verschil binnen de ruis). Het premisse-eerst-voordeel zat dus in de *leesindruk*, niet in de forensische vingerafdruk.
+- **Blijvende, modus-onafhankelijke tells:** AI gebruikt ~34% meer komma's dan Tellegen en heeft lagere lexicale diversiteit; premisse-eerst repareert dat niet. Een getrainde classifier zou AI vermoedelijk nog steeds scheiden.
+- **Fingerprint-in-de-loop werkt niet.** De tekst bijsturen op de gemeten tells (komma's mechanisch fixen óf holistisch herzien) laat de vingerafdruk onbewogen: komma-fix geeft 0 verandering in MFW-Delta; herziening beweegt beide families verwaarloosbaar en inconsistent (held-out char-3-gram bevestigt geen convergentie). De afstand is een model-distributie-eigenschap, niet via prompting te dichten.
+- **Geen plagiaat:** verbatim-overlap verwaarloosbaar (8-gram ≈ 0%; één eerlijk gemelde stockfrase-collisie).
+
+Dit alles **strookt met** de geciteerde literatuur en weerlegt die niet.
+
 ---
 
 ## 10. TL;DR — geïntegreerde, objectieve conclusie (alle fases samen)
@@ -324,7 +229,7 @@ Bekijk je niet elke fase apart maar het geheel, dan verschuift de eerlijke concl
 
 **Wat dat met de cijfers doet.** Een *absolute* uitspraak ("AI komt tot 9/10" of "ononderscheidbaar van Tellegen") is niet houdbaar: ze rust op een instrument dat echt-van-echt niet betrouwbaar scheidt, plus een circulaire jury (schrijver = jury-modelfamilie). Wél houdbaar zijn *relatieve, ordinale* vergelijkingen binnen hetzelfde instrument:
 - de pipeline > een naïef één-shot-prompt (≈7-8 vs ≈4) — relatief robuust, want beide zijn AI;
-- premisse-eerst > thema-eerst — verschoof de panel-oordelen sterk en consistent, met exotische én klassieke dieren.
+- premisse-eerst > thema-eerst — verschoof de *panel-oordelen* sterk en consistent (exotische én klassieke dieren), maar **stylometrisch geen verschil** (zie pilot).
 
 Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 
@@ -333,7 +238,7 @@ Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 1. **Methodisch/generatief (positief, bescheiden).** Een meertraps analyse→generatie→review→blindtest-opzet werkt als onderzoeksinstrument, en één generatieve hefboom bleek robuust: *begin bij een concrete, absurde premisse, niet bij een thema, en optimaliseer niet.* Bruikbaar als schrijfstrategie — geen capaciteitsbewijs.
 2. **Meet-technisch (negatief — wellicht het stevigste resultaat).** LLM-panels zijn onbetrouwbare detectoren van literaire AI-imitatie: ze missen goede imitaties én beschuldigen authentiek werk, en hun oordeel is contextafhankelijk en instabiel. Wie "ononderscheidbaarheid" of "AI-detectie" claimt op basis van LLM-jury's, meet het instrument, niet de tekst.
 
-**Wat we NIET gemeten hebben.** De maatstaf van het vakgebied — stylometrie (Burrows' Delta, AMNP), die AI van mens scheidt met >80% ongeacht hoe overtuigend de tekst leest — is op géén enkel verhaal gedraaid. Het blijft dus een open vraag of premisse-eerst de werkelijke stilistische afstand verkleint of alleen de leesindruk van een zwakke jury. Op de maatstaf die telt, hebben we geen meting.
+**Wat een stylometrische pilot daarna toevoegde.** Een lokale harness (MFW-Delta + held-out char-3-gram-Delta) gaf het antwoord op de open vraag: premisse-eerst verkleint de stilistische afstand tot Tellegen **niet** (0,850 vs 0,869 voor thema-eerst); het voordeel zat alleen in de leesindruk. Modus-onafhankelijke tells (komma-overgebruik, lagere lexicale diversiteit) blijven, en fingerprint-in-de-loop sluit de gap niet. Dit is wél een pilot (kleine n, geen getrainde classifier, geen menselijke raters) — geen vervanging van het volledige ontwerp in `PROTOCOL.md`.
 
 **De zuivere bottom line.** We kunnen niet onderbouwd zeggen hóé dicht AI bij Tellegen komt — met een valide instrument is dat nooit gemeten. We kunnen wél zeggen: (a) er is een reproduceerbare generatieve strategie die de leesindruk sterk verbetert, en (b) de blindtest-vorm die wij (en velen) hanteren deugt niet als meetlat. Elk enkel cijfer — 6, 8 of 10 — is vooralsnog een artefact van de opzet, geen eigenschap van de tekst. Een echt cijfer vergt het ontwerp in `PROTOCOL.md` (menselijke raters, niet-circulaire jury, stylometrie, controle-items, plagiaat-audit).
 
