@@ -1,0 +1,40 @@
+# Stylometrie + plagiaat-audit — resultaten (pilot)
+
+**Datum:** 2026-05-28. Pure-Python harness (`stylometry.py`), copyright-veilig (bron-tekst lokaal; alleen metrics hieronder).
+
+**Opzet.** Echt corpus: ~31.660 woorden uit de 4 bundels (inhoudspagina's), 69 samples van ~450 woorden. AI premisse-eerst (n=5: zeekomkommer, olifant, wielewaal, wesp, zeearend) vs AI thema-eerst (n=5: karper, spitsmuis, krekel, karper-gemis, oud-worden). Maten: Burrows'-achtige Delta (gem.|z| over 100 MFW, gestandaardiseerd op het echte corpus), nearest-neighbour-Delta, lexicale/burstiness-features, en verbatim n-gram-overlap.
+
+## 1. Delta tot Tellegen-profiel (MFW)
+- ECHT-spreiding: 0,765 ± 0,069 (0,615–0,945).
+- premisse-eerst gemiddeld **0,850**; thema-eerst **0,869**. Verschil **0,019** — ruim binnen de ruis (≪ sd 0,069).
+- Beide AI-groepen liggen ~1 sd boven het echte gemiddelde, grotendeels binnen de natuurlijke spreiding; één uitschieter (wielewaal, +3,1 sd).
+
+→ **Premisse-eerst is stylometrisch niet dichter bij Tellegen dan thema-eerst.** Het in de blindtests gevonden voordeel zit in de *leesindruk*, niet in de function-word-vingerafdruk.
+
+## 2. Nearest-neighbour (MFW)
+ECHT→dichtstbijzijnde echte: 0,808 (max 0,987). Alle AI-teksten hebben een echte buur op Delta 0,79–0,94 — binnen het echte NN-bereik. Een naïeve NN-MFW-test scheidt onze AI dus niet van Tellegen. **Caveat:** dit is géén geldige discriminatietest (geen contrast-auteur, geen getrainde classifier, kleine n) en weerlegt de literatuur niet.
+
+## 3. Lexicale / burstiness-features (groepsgemiddelden)
+| groep | zinsl. gem | zinsl. sd | burstiness CV | TTR300 | hapax300 | woordlengte | komma/100w |
+|---|---|---|---|---|---|---|---|
+| ECHT | 12,73 | 8,40 | 0,66 | 0,50 | 0,34 | 4,20 | **5,60** |
+| premisse | 13,18 | 9,03 | 0,68 | 0,46 | 0,30 | 4,03 | **7,87** |
+| thema | 13,16 | 8,15 | 0,62 | 0,46 | 0,30 | 3,94 | **7,29** |
+
+Bevindingen:
+- **Zinslengte/burstiness:** AI ≈ Tellegen — géén grotere uniformiteit hier (premisse zelfs iets bursty-er). De verwachte "vlakheid" toont zich niet op deze maat.
+- **Concrete, blijvende AI-tells, identiek in beide modi:** komma-overgebruik (~7,5 vs 5,6 = +34%), iets lagere lexicale diversiteit (TTR 0,46 vs 0,50; hapax 0,30 vs 0,34), kortere woorden. **Premisse-eerst repareert deze niet.**
+
+## 4. Verbatim-overlap (plagiaat-audit)
+- 8-gram-overlap met het corpus ≈ **0%** (één geval 0,2%); 5-gram 0–1,7%.
+- Langste gedeelde reeksen: 5–6 generieke woorden ("hij keek om zich heen", "terwijl de zon onderging en de", "hij wist niet wat hij").
+- **Eén 8-woord-collisie** (AI-karper, blindtest7): *"dat geeft niet zei de karper de snoek"* — geverifieerd aanwezig in het echte corpus. Oorzaak: de stockfrase *"Dat geeft niet"* + de canonieke personages karper/snoek die Tellegen zelf samen gebruikt. Geen overname van distinctieve expressie, maar wél een eerlijk te melden drift naar bestaande tekst op één punt.
+
+→ **Geen plagiaat:** overlap op het niveau van veelvoorkomende function-word- en stockfrasen, niet van eigen Tellegen-formuleringen. Voldoet aan het criterium uit `PROTOCOL.md` (hoge stijlgelijkenis + verwaarloosbare tekstoverlap).
+
+## 5. Conclusie van de pilot
+1. **De stylometrie ontkracht de sterke lezing van de "doorbraak".** Premisse-eerst verandert de leesindruk, niet de forensische vingerafdruk; meetbare tells (komma's, lexicale diversiteit) blijven en zijn gelijk in beide modi. Een getrainde classifier zou AI waarschijnlijk nog steeds scheiden. Dit **strookt met** de geciteerde literatuur (surface/architectuur ≠ diepe vingerafdruk).
+2. **Het werk is in de kern niet-plagiërend** (één stockfrase-collisie eerlijk gemeld).
+3. **Caveats:** kleine n (5/groep), één corpus-deelverzameling, MFW=100, geen contrast-auteur, geen getrainde classifier, geen significantietoets. Dit is een pilot, geen vervanging van het volledige ontwerp in `PROTOCOL.md` (menselijke raters, ROC, getrainde stylometrie, meer trials).
+
+**Netto:** op de maatlat die het vakgebied hanteert hebben we **geen** verbetering aangetoond; ons enige gefundeerde resultaat blijft (a) een reader-impression-strategie en (b) dat LLM-jury's onbetrouwbare detectoren zijn. De stylometrie-pilot maakt dat scherper, niet rooskleuriger.
