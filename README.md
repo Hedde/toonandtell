@@ -128,35 +128,23 @@ Dit patroon is overdraagbaar naar andere stilistische analyse-projecten.
 ## 6. Artefacten
 
 ```
-.claude/agents/
-├── linguist-nederlands.md
-├── neerlandicus-afgestudeerd.md
-├── redacteur-uitgeverij.md
-├── toon-tellegen-fan.md
-└── toon-tellegen-schrijver.md            (398 regels, 7 tunings)
-
+CLAUDE.md                                  de gevalideerde werkwijze, stapsgewijs
+.claude/agents/   vijf agents (schrijver: premisse-eerste motor + temporeel register;
+                  reviewers: diachrone register-, themalegbaarheid- en over-correctie-checks)
 analyses/
-├── dank_je_wel/
-│   ├── linguist.md, neerlandicus.md, redacteur.md, team_synthese.md
-├── een_hart_onder_de_riem/
-│   ├── (idem)
-├── maar_niet_uit_het_hart/
-│   ├── (idem)
-├── met_hart_en_ziel/
-│   ├── (idem)
-├── synthesis/
-│   └── cross_book_refinement.md          (~550 regels)
+├── dank_je_wel/ · een_hart_onder_de_riem/ · maar_niet_uit_het_hart/ · met_hart_en_ziel/
+│        (per boek: linguist.md, neerlandicus.md, redacteur.md, team_synthese.md)
+├── synthesis/cross_book_refinement.md     (fundament voor de schrijfagent)
 └── refinement/
-    ├── verhaalproducties fase 1-2 (slak, otter-kokkel, capybara, paling, mier-duizendpoot, ooievaar-kikker, reiger-kikker, mus-ochtend)
-    ├── blindtest7/ (karper & snoek — proza-tuning + typografie genivelleerd)
-    ├── blindtest8/ (zeekomkommer — premisse-eerst, bewijs + replicatie)
-    ├── blindtest9/ (olifant — premisse-eerst, klassieke dieren, per-item-protocol)
-    ├── LEARNINGS.md (wetenschappelijke samenvatting + confounds)
-    ├── PIPELINE.md + normalize.py (operationele stappen + "de schoner")
-    └── reviews per ronde + blindtests 1-9
+    ├── LEARNINGS.md · PIPELINE.md · PROTOCOL.md   (resultaten / werkwijze / rigoureus meetontwerp)
+    ├── blindtest5_summary.md · literatuur_aanknopingspunten.md   (compacte fase 1-2-record)
+    ├── blindtest7/  (karper & snoek — proza-tuning + typografie genivelleerd)
+    ├── blindtest8/  (zeekomkommer — premisse-eerst: bewijs + replicatie)
+    ├── blindtest9/  (olifant — premisse-eerst, klassieke dieren, per-item-protocol)
+    └── stylometry/  (measure.py, stylometry.py, extract_corpus.sh, RESULTS.md)
 ```
 
-Daarnaast in fase 3 toegevoegd/bijgewerkt: **`CLAUDE.md`** (root, de gevalideerde werkwijze) en de vijf agent-definities (schrijver: premisse-eerste motor + temporeel register; reviewers: diachrone register-, themalegbaarheid- en over-correctie-checks).
+De granulaire fase-1-2-werkbestanden (per-reviewer-reviews, vroege story-drafts, per-ronde-blindtests) zijn opgeschoond; de fundamentele analyses, de cross-boek-synthese en de samenvattingen bleven behouden. Verbatim bron-extracten en render-PDF's staan in `.gitignore` (auteursrecht / reproduceerbaar).
 
 ---
 
