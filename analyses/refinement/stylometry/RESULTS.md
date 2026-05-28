@@ -38,3 +38,25 @@ Bevindingen:
 3. **Caveats:** kleine n (5/groep), één corpus-deelverzameling, MFW=100, geen contrast-auteur, geen getrainde classifier, geen significantietoets. Dit is een pilot, geen vervanging van het volledige ontwerp in `PROTOCOL.md` (menselijke raters, ROC, getrainde stylometrie, meer trials).
 
 **Netto:** op de maatlat die het vakgebied hanteert hebben we **geen** verbetering aangetoond; ons enige gefundeerde resultaat blijft (a) een reader-impression-strategie en (b) dat LLM-jury's onbetrouwbare detectoren zijn. De stylometrie-pilot maakt dat scherper, niet rooskleuriger.
+
+---
+
+## 6. Fingerprint-in-the-loop: werkt kennis van de vingerafdruk?
+Test of we, nu we de tells kennen, het proces kunnen aanscherpen tot lagere stylometrische afstand. Anti-Goodhart-waarborg: een **held-out** vingerafdruk (karakter-3-gram-Delta) die de ingreep niet direct kon targeten (`measure.py`).
+
+Twee ingrepen op 3 premisse-eerste teksten:
+- **A — mechanische komma-fix** (komma-rate → Tellegens 5,6/100w).
+- **B — holistische herziening** door de schrijfagent richting Tellegens gemeten profiel (minder komma's, meer woordvariatie, gevarieerde zinslengte).
+
+| tekst | MFW-Delta | char3-Delta | komma/100 |
+|---|---|---|---|
+| echt (ref) | 0,765 (max 0,945) | 0,779 (max 0,940) | 5,6 |
+| zeekomkommer basis → A → B | 0,843 → 0,843 → 0,840 | 1,007 → 1,001 → 0,992 | 7,1 → 5,6 → 3,9 |
+| olifant basis → A → B | 0,828 → 0,828 → 0,851 | 0,848 → 0,840 → 0,854 | 9,1 → 5,7 → 4,7 |
+| wielewaal basis → A → B | 0,978 → 0,978 → 0,901 | 1,116 → 1,116 → 1,069 | 8,2 → 5,7 → 3,8 |
+
+**Uitkomst: het werkt niet.**
+- Komma-fix raakt het doel exact maar laat MFW-Delta **ongewijzigd** (0 verandering) en char3-Delta nauwelijks → één feature is niet de vingerafdruk; dit is Goodhart-gaming.
+- Holistische herziening beweegt beide vingerafdrukken verwaarloosbaar en inconsistent (olifant zelfs slechter; wielewaal iets beter maar char3 blijft ver boven de echte max). Geen convergentie.
+
+**Conclusie:** de stylometrische afstand reflecteert de output-distributie van het model, niet de oppervlaktekeuzes die ons proces kan bijsturen. Kennis van de vingerafdruk levert via prompting/herziening **geen** scherper stylometrisch resultaat — consistent met de literatuur. Het sluiten van de gap zou ingrepen op modelniveau vergen (fine-tuning/DPO op een discriminator), buiten dit project.
