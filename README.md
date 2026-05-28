@@ -316,40 +316,26 @@ Het volledige rigoureuze ontwerp — inclusief de model-arm ("komt Claude 4.8 di
 
 ---
 
-## 10. TL;DR — fase 1-2 (herzien door fase 3)
+## 10. TL;DR — geïntegreerde, objectieve conclusie (alle fases samen)
 
-> **Let op:** onderstaande TL;DR vat fase 1-2 samen en stelde een structureel "6-8/10-plafond" vast bij prozagerichte tuning. Fase 3 (sectie 9) nuanceert dit op twee punten: (a) een andere *generatieve aanpak* (premisse-eerst) gaf binnen onze opzet veel hogere panel-scores, en (b) het LLM-panel bleek een onbetrouwbare detector. De claims hieronder over "detectie" en "het plafond" gelden dus alleen voor het zwakke LLM-panel-meetinstrument, niet als algemene capaciteits- of stylometrische uitspraak.
+Bekijk je niet elke fase apart maar het geheel, dan verschuift de eerlijke conclusie weg van een rapportcijfer.
 
-**Wat AI op dit moment kan, anno mei 2026 (Claude Opus 4.7, EQ-Bench Creative Writing leider):**
+**Eén instrument, twee tegengestelde cijferreeksen.** Fase 1-2 gaf 6-8/10 met 3/3-detectie; fase 3 (premisse-eerst) gaf 9-10/10 met 0/3. Beide reeksen komen van hetzelfde meetinstrument: een panel van LLM-agents uit dezelfde modelfamilie als de schrijver. In fase 3 is aangetoond dat dat instrument onbetrouwbaar is — het bestempelt echte Tellegens als AI en geeft identieke tekst tussen runs tegengestelde oordelen.
 
-- *Surface-stijl reproduceerbaar:* zinslengte-distributies, woordlengtes, register, lexicaal veld, microtechnieken (parataxis, diminutief, vrije indirecte rede, reificatie). Dit gaat opvallend goed — een AI-Tellegen scoort 7-8/10 waar een naïef GPT-prompt 4/10 haalt.
-- *Mid-level technieken reproduceerbaar:* asymmetrische cast, brief-als-genre, conditionaal-keten, predator-prooi-onderlaag — als procedure leerbaar.
-- *Best-case:* in 1 van 4 blindtests werd 35% twijfel bereikt bij een expert-reviewer — ruim onder de 50% die voor "echt onderscheidsbaar" nodig is, maar boven het ruisniveau.
+**Wat dat met de cijfers doet.** Een *absolute* uitspraak ("AI komt tot 9/10" of "ononderscheidbaar van Tellegen") is niet houdbaar: ze rust op een instrument dat echt-van-echt niet betrouwbaar scheidt, plus een circulaire jury (schrijver = jury-modelfamilie). Wél houdbaar zijn *relatieve, ordinale* vergelijkingen binnen hetzelfde instrument:
+- de pipeline > een naïef één-shot-prompt (≈7-8 vs ≈4) — relatief robuust, want beide zijn AI;
+- premisse-eerst > thema-eerst — verschoof de panel-oordelen sterk en consistent, met exotische én klassieke dieren.
 
-**Waar het structureel tekortschiet:**
+Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 
-1. **Uniformiteit is een sampling-eigenschap, geen regel-eigenschap.** Burrows' Delta detecteert AI-tekst met >80% accuratesse omdat AI-output tight clustert in z-score-ruimte. Geen prompt kan dit opheffen — een prompt kan specifieke patronen verbieden, waarna nieuwe uniforme patronen ontstaan. Dit is in deze sessie empirisch gerepliceerd: blacklist haalde de directe tells weg, score bleef gelijk, nieuwe tells verschenen.
+**De twee uitspraken die het hele traject overleven:**
 
-2. **Author Multilevel N-gram Profile faalt.** Oppervlaktewoordkeuze klopt; de diepe sequentie­statistiek waarop literaire vingerafdrukken rusten niet. Stylometrische auteursherkenning blijft AI van mens scheiden ook bij hoog scorende imitaties.
+1. **Methodisch/generatief (positief, bescheiden).** Een meertraps analyse→generatie→review→blindtest-opzet werkt als onderzoeksinstrument, en één generatieve hefboom bleek robuust: *begin bij een concrete, absurde premisse, niet bij een thema, en optimaliseer niet.* Bruikbaar als schrijfstrategie — geen capaciteitsbewijs.
+2. **Meet-technisch (negatief — wellicht het stevigste resultaat).** LLM-panels zijn onbetrouwbare detectoren van literaire AI-imitatie: ze missen goede imitaties én beschuldigen authentiek werk, en hun oordeel is contextafhankelijk en instabiel. Wie "ononderscheidbaarheid" of "AI-detectie" claimt op basis van LLM-jury's, meet het instrument, niet de tekst.
 
-3. **Geen authentiek surplus.** AI-output is intrinsiek consistent — iedere zin dient een functie, iedere terugkeer is gepland. Tellegens *bijna heerlijk*-effect ontstaat doordat de schrijver dingen schrijft die voor zichzelf bestaan, niet voor de tekst. De drie blindtest-reviewers diagnosticeerden onafhankelijk hetzelfde: de pipeline schrijft een verhaal dat *wil klinken alsof het niet weet hoe het eindigt*; Tellegen schrijft een verhaal dat werkelijk niet weet hoe het eindigt.
+**Wat we NIET gemeten hebben.** De maatstaf van het vakgebied — stylometrie (Burrows' Delta, AMNP), die AI van mens scheidt met >80% ongeacht hoe overtuigend de tekst leest — is op géén enkel verhaal gedraaid. Het blijft dus een open vraag of premisse-eerst de werkelijke stilistische afstand verkleint of alleen de leesindruk van een zwakke jury. Op de maatstaf die telt, hebben we geen meting.
 
-4. **Bewust geconstrueerde onafgemaaktheid is een vorm van afgemaaktheid.** Toevoegen van "ruwheid" via instructies produceert net zo goed pastiche als gepolijste imitatie. De "ruwheid" wordt zelf systematisch ingezet en daardoor herkenbaar.
-
-5. **Prompt-engineering plateauert.** EMNLP 2025 bevestigt dat meer few-shot voorbeelden de metrics niet verbeteren. Onze zes tuningrondes lopen tegen dezelfde wand. Het plafond zit niet in de schrijver maar in de *output-distributie* van het onderliggende model.
-
-**Wat in principe wél door de wand kan breken (volgens recent onderzoek), maar buiten dit project valt:**
-
-- Fine-tuning op auteurscorpus (FTPO uit het Antislop-paper, 90% slop-reductie). Auteursrechtelijk en ethisch grijs op canonieke literatuur.
-- Diffusion-based LLMs (recente vergelijkingen tonen LLaDA-output bijna ononderscheidbaar van mens op perplexity-metrics).
-- Multi-temperatuur ensembles met menselijke of stylometrische selectie — introduceert echte sampling-spread.
-- Hybride prompting + RL/DPO op auteurspecifieke discriminator-feedback.
-
-**De bredere implicatie voor de taalanalyticus:**
-
-AI-pastiche staat nu op het niveau van *competente literaire imitatie*: bruikbaar voor educatieve analyse, voor stijlverkenning, voor draftwerk. Niet op het niveau van *publiceerbaar onder de naam van de geïmiteerde auteur*. De grens tussen die twee niveaus blijkt geen schaalkwestie maar een eigenschap van wat een literaire stem *is* — een schrijver die in zijn eigen wereld iets meer schrijft dan zijn tekst. Modellen die patronen leren kunnen patronen reproduceren; ze kunnen geen *bewoner* zijn.
-
-Tellegen-stijl is een bijzonder zuivere stresstest hiervoor, omdat zijn werk gebouwd is op minimalisme, stilte en het nalaten — precies de plekken waar AI standaard *opvult*. In die zin is het 6-8/10-plafond geen falen van de pipeline; het is een meting van waar het verschil tussen technisch kennen en literair *bewonen* op dit moment ligt.
+**De zuivere bottom line.** We kunnen niet onderbouwd zeggen hóé dicht AI bij Tellegen komt — met een valide instrument is dat nooit gemeten. We kunnen wél zeggen: (a) er is een reproduceerbare generatieve strategie die de leesindruk sterk verbetert, en (b) de blindtest-vorm die wij (en velen) hanteren deugt niet als meetlat. Elk enkel cijfer — 6, 8 of 10 — is vooralsnog een artefact van de opzet, geen eigenschap van de tekst. Een echt cijfer vergt het ontwerp in `PROTOCOL.md` (menselijke raters, niet-circulaire jury, stylometrie, controle-items, plagiaat-audit).
 
 ---
 

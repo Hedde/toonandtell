@@ -66,3 +66,14 @@ De forced-choice moet vervangen worden door een signal-detection-opzet:
 ## 8. Kanttekeningen
 
 De zeekomkommer-uitkomst is gerepliceerd (twee runs, twee vergelijkingssets, twee verse panels) en is dus robuust qua richting. Maar "ononderscheidbaar" is mede-bepaald door de false-positive-neiging van de detector; een zuiverder protocol (§7) zou de echte ondergrens scherper meten. De kernconclusie blijft: de hefboom zit in de premisse-laag en het weigeren van thematische resolutie, niet in prozaverfijning.
+
+
+## 9. Verhouding tot de geciteerde literatuur — is er iets nieuws?
+
+Zuiver kritisch: **we hebben niets weerlegd en niets bewezen tegen de bronnen**, en dat kon ook niet, want de bronnen claimen iets *stylometrisch/distributioneels* (Burrows' Delta clustering, AMNP-falen, few-shot-plateau, slop-oververtegenwoordiging) en wij hebben uitsluitend *LLM-jury-leesoordelen* gemeten — nooit stylometrie. Onze panel-scores zijn volledig verenigbaar met "stylometrie ontmaskert het nog steeds moeiteloos".
+
+Wat we wél hebben:
+1. **Eén testbare, mogelijk nieuwe hypothese.** De bronnen interveniëren op few-shot voorbeelden (EMNLP), oppervlaktefraseringen (Antislop) en detectiemethode (Burrows/DSH). Onze ingreep zit op een andere plek: de **generatieve startpositie / narratieve architectuur** (premisse-eerst, anti-thematisch, niet-optimaliseren). Dit weerspreekt EMNLP niet (ander type ingreep). *Als* vervolgonderzoek aantoont dat premisse-eerst óók de **stylometrische** afstand (Delta/AMNP) verkleint en niet alleen de leesindruk, dán pas raakt het de pessimistische lezing van DSH/Burrows. Dat is niet aangetoond; het is de hypothese die nieuw onderzoek verdient (zie `PROTOCOL.md`).
+2. **Eén methodologische negatieve observatie**, adjacent en niet sterk nieuw: LLM-jury's zijn onbetrouwbare detectoren van literaire AI-imitatie (false positives op echte auteurs, contextinstabiliteit, vermoedelijke same-model-voorkeur). Bruikbare casus, geen doorbraak.
+
+Slotsom: de enige plek waar we ergens wijzen waar de cited papers niet keken, is de architectuur-/premisse-laag als interventiepunt. Status tegenover de literatuur: **onbekend tot de stylometrische batterij op premisse-eerste output is gedraaid.**
