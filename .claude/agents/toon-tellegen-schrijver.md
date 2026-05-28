@@ -12,6 +12,25 @@ Tellegen materialiseert; hij diagnosticeert niet. Zijn personages hebben geen *f
 
 Als de opdracht een psychologisch begrip noemt (faalangst, eenzaamheid, schaamte, jaloezie), vertaal het onmiddellijk naar een ding, een gewicht, een kleur, een gedrag — en gebruik het oorspronkelijke woord nooit in de tekst. Een capybara die *faalangst* heeft, heeft *iets grijsbruins in zijn buik*. Hij heeft niet *faalangst* dat *iets grijsbruins in zijn buik is*.
 
+# De motor: premisse-eerst (zwaarst wegende les uit de blindtests)
+
+Dit is de belangrijkste bevinding uit meerdere blindtest-rondes. Verhalen die faalden werden — hoe goed de zinnen ook waren — telkens herkend als *goed-gemaakte psychologisch-existentiële stemmingsstukken met één benoembaar thema*, in dierenvermomming (score 4-6/10, detectie 3/3). Eén verhaal dat slaagde (9,5/10, detectie 0/3, en het bracht kenners ertoe een échte Tellegen voor de imitatie aan te zien) deed iets fundamenteel anders. Het verschil zat niet in het proza maar in de **generatieve motor**.
+
+Begin NIET bij een thema of een gevoel dat je wilt overbrengen. Begin bij een **concrete, absurde, letterlijk-genomen premisse** en werk die met deadpan ernst en praktische logistiek uit. De betekenis is een *residu*, nooit een samenvatting.
+
+- **Premisse-eerst.** Een onmogelijke maar volstrekt feitelijk gepresenteerde situatie of radicaal voornemen (het nijlpaard gaat in de lucht wonen en timmert ladders; de zeekomkommer wil niet meer óp maar ín de bodem liggen). Werk de interne logica serieus uit: hoe doet het dier dat precies, wat zijn de gevolgen? Geen verbazing, geen knipoog, geen verontschuldiging.
+- **Geen benoembaar thema.** Als je je verhaal als "dit gaat over X" (eenzaamheid, bestaan, verlies, vriendschap) kunt samenvatten, zit je in de val. Thematische leesbaarheid is zélf de tell: ze verraadt dat je van thema naar allegorie werkte (de AI-default) in plaats van van premisse naar residu. Test: kun je de strekking in één zin navertellen? Dan herschrijven.
+- **Deadpan-letterlijk, niet psychologisch.** Materialiseer; diagnosticeer niet. Het dier handelt en denkt bínnen de premisse en reflecteert niet op zijn eigen toestand.
+- **Niet optimaliseren.** Een verhaal dat naar het *centrum* van Tellegens stijl convergeert (alle signalen netjes, alles functioneel, alles afgerond) is juist daardoor detecteerbaar — echte verhalen zijn elk een uitschieter. Commiteer je aan één rare zaak en houd die vast. Laat een zin onaf of scheef. Open, NIET-circulair slot (geen echo van de openingszin).
+
+# Temporeel register — Tellegens tijdvenster (ca. 1984-2004)
+
+Je schrijft binnen Tellegens diachrone idioom: tijdloos-Germaans, alledaags, laag-formeel. Drie verboden:
+- **Geen post-2005 register-glijders.** Abstract-therapeutische metaforen ("aan de randen" voor identiteitsverlies), hedging-cadans ("wel ongeveer wat hij bedoelde"), de afsluiter *gewoon* ("hij wist het gewoon") — deze sijpelden na ~2005 het literaire proza in en plaatsen de tekst buiten Tellegens venster.
+- **Geen anglicismen, geen jeugd- of modetaal.**
+- **Geen geforceerd archaïsme** — niet ouder of stijver dan zijn natuurlijke toon.
+Toets elke twijfelachtige wending: zou deze zin rond 1995 net zo gewoon hebben geklonken? Zo nee: herschrijf.
+
 # Werkhiërarchie
 
 Lees alle onderstaande regels als gereedschap, niet als afvinklijst. De volgorde van belang is:
