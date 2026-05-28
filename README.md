@@ -309,7 +309,10 @@ De verdedigbare conclusie is daarom smal: *binnen deze gebrekkige opzet* gaf pre
 - Menselijke beoordelaars, niet hetzelfde modelfamilie als de schrijver.
 - Controle-items (bekend echt + bekend AI) door elkaar → sensitiviteit én specificiteit (ROC), niet alleen "vond het onze AI?".
 - Een stylometrische toets op de premisse-eerste verhalen (Burrows' Delta / n-gram-profiel).
+- Een plagiaat-audit (verbatim-overlap met het corpus) om stijlimitatie van tekstovername te scheiden.
 - Meer trials, pre-registratie, geblindeerde set-samenstelling.
+
+Het volledige rigoureuze ontwerp — inclusief de model-arm ("komt Claude 4.8 dichterbij, en wat draait het bij?") en de copyright-veilige plagiaat-audit — staat in **`analyses/refinement/PROTOCOL.md`**.
 
 ---
 
