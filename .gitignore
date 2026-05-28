@@ -24,3 +24,9 @@ node_modules/
 # Environment
 .env
 .env.local
+
+# Tellegen blindtest: render-artefacten en verbatim bronfragmenten horen niet in git
+analyses/**/*.pdf
+analyses/**/raw/real_*.txt
+analyses/**/panel*/
+analyses/**/*_blind/
