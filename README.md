@@ -1,27 +1,36 @@
 # toonandtell
 
-*Een meertraps agent-pipeline die Toon Tellegens dierenverhalen analyseert en synthetisch reproduceert — en zo het huidige plafond van AI-pastiche van een literaire stem in kaart brengt.*
+*Een meertraps agent-pipeline die Toon Tellegens dierenverhalen analyseert en synthetisch reproduceert — en, eerlijker geformuleerd, vooral in kaart brengt hoe moeilijk het is om "ononderscheidbaarheid" überhaupt betrouwbaar te meten.*
 
 ---
 
 ## Over dit project
 
-Experimenteel onderzoeksproject naar stilistische AI-imitatie van Toon Tellegens werk, opgezet als pipeline van vijf gespecialiseerde Claude-agents (linguïst, neerlandicus, redacteur, fan, schrijver). Zes blindtests, zeven tuningrondes en een literatuurscan tonen waar AI nu staat in literaire pastiche en — belangrijker — waar het structureel tekortschiet.
+Experimenteel, **educatief** onderzoeksproject naar stilistische AI-imitatie van Toon Tellegens werk, opgezet als pipeline van vijf gespecialiseerde Claude-agents (linguïst, neerlandicus, redacteur, fan, schrijver). Negen blindtests en meerdere tuningrondes in drie fasen.
 
-Het werk is **educatief** van aard, opgezet vanuit een taalanalytische interesse in wat er gebeurt als je een complexe literaire stem probeert te ontleden in reproduceerbare regels. De uitkomst is dubbel: een werkende methodische opzet voor stilistische analyse via meervoudige agents, én een empirische diagnose van wat in een literaire stem precies *niet* reduceerbaar blijkt.
+> **Belangrijk methodologisch voorbehoud vooraf.** Alle "beoordelaars" in dit project zijn LLM-agents (Claude), géén menselijke experts. De schrijfagent is hetzelfde modelfamilie als de jury. Detectie gebeurt door *lezen en gokken*, niet stylometrisch. De getallen hieronder zijn dáárom indicatief, niet bewijzend — zie sectie 10 voor de volledige lijst confounds. Lees "0/3 herkend" als "dit specifieke, aantoonbaar onbetrouwbare LLM-panel flagde het niet", niet als "ononderscheidbaar voor mensen of voor stylometrie".
+
+De uitkomst kent drie lagen:
+1. Een werkende methodische opzet voor stilistische analyse via meervoudige agents (fase 1-2).
+2. Bij prozagerichte prompt-tuning bleef het LLM-panel alle AI-verhalen herkennen, met scores rond **6-8/10** (fase 1-2) — destijds geïnterpreteerd als een structureel plafond.
+3. **Fase 3:** een andere *generatieve aanpak* — **premisse-eerst** in plaats van thema-eerst — leverde binnen deze opzet een groot effect op (panel-scores ~9-10/10, 0/3 geflagd, over drie verhalen incl. klassieke dieren). MAAR datzelfde experiment toonde dat het panel een **onbetrouwbaar meetinstrument** is: het bestempelde meerdere échte Tellegen-verhalen als AI, en gaf hetzelfde echte verhaal in verschillende runs tegengestelde oordelen. Het grote effect is dus suggestief, niet bewijzend; het "plafond" is niet aantoonbaar doorbroken in stylometrische of menselijke zin.
 
 ### Repo-structuur
 
-- **`.claude/agents/`** — vijf agent-definities (YAML-frontmatter + Markdown systeemprompt) die samen de pipeline vormen
-- **`analyses/`** — onderzoeksoutput per Tellegen-bundel, cross-boek synthese, blindtest-rapporten en literatuurscan
+- **`CLAUDE.md`** — de gevalideerde werkwijze, stapsgewijs (lees dit eerst bij vervolgwerk)
+- **`.claude/agents/`** — vijf agent-definities (YAML-frontmatter + Markdown systeemprompt)
+- **`analyses/refinement/LEARNINGS.md`** — zo wetenschappelijk mogelijke samenvatting (wat wel/niet werkte, kerntabel, false-positive-bevinding)
+- **`analyses/refinement/PIPELINE.md`** — operationele stappen + `normalize.py`
+- **`analyses/`** — onderzoeksoutput per bundel, cross-boek synthese, blindtest-rapporten (1-9), literatuurscan
 - **`codex-review.md`** — interne audit van de review-revisie-cyclus
-- **`README.md`** — dit document; volledig sessieverslag inclusief TL;DR
+- **`README.md`** — dit document; volledig sessieverslag
 
 ### Snel naar de kern
 
-- Wil je weten **wat AI nu wel en niet kan** in literaire pastiche? Sectie 9 (TL;DR).
-- Wil je de **methodologie** zien? Secties 2 en 3.
-- Wil je de **blindtest-resultaten**? Secties 4 en 8.
+- Wil je **het premisse-eerst-effect** en waarom we het niet als doorbraak mogen lezen? Secties 9 en 10.
+- Wil je **wat wel/niet werkte** + de confounds, beknopt? `analyses/refinement/LEARNINGS.md`.
+- Wil je de **methodologie**? Secties 2-3 (analyse) en `CLAUDE.md` (de gevalideerde pijplijn).
+- Wil je de **blindtest-resultaten** fase 1-2? Secties 4 en 8.
 
 ---
 
@@ -184,9 +193,16 @@ analyses/
 ├── synthesis/
 │   └── cross_book_refinement.md          (~550 regels)
 └── refinement/
-    ├── verhaalproducties (slak v1/v2/v3, otter v1/v2, capybara, paling, mier-duizendpoot, ooievaar-kikker, reiger-kikker iter 1/2/3, mus-ochtend)
-    └── reviews per ronde + 6 blindtests
+    ├── verhaalproducties fase 1-2 (slak, otter-kokkel, capybara, paling, mier-duizendpoot, ooievaar-kikker, reiger-kikker, mus-ochtend)
+    ├── blindtest7/ (karper & snoek — proza-tuning + typografie genivelleerd)
+    ├── blindtest8/ (zeekomkommer — premisse-eerst, bewijs + replicatie)
+    ├── blindtest9/ (olifant — premisse-eerst, klassieke dieren, per-item-protocol)
+    ├── LEARNINGS.md (wetenschappelijke samenvatting + confounds)
+    ├── PIPELINE.md + normalize.py (operationele stappen + "de schoner")
+    └── reviews per ronde + blindtests 1-9
 ```
+
+Daarnaast in fase 3 toegevoegd/bijgewerkt: **`CLAUDE.md`** (root, de gevalideerde werkwijze) en de vijf agent-definities (schrijver: premisse-eerste motor + temporeel register; reviewers: diachrone register-, themalegbaarheid- en over-correctie-checks).
 
 ---
 
@@ -256,9 +272,50 @@ De directe verbatim-tells (asterisken, blacklist-fraseringen) waren weg — beve
 
 Het plafond ligt rond 6-8/10. Tunings die binnen prompt-engineering blijven schuiven niet meer.
 
+> **Nuance uit fase 3 (zie §9):** dit gold voor tuning op *zinsniveau*. Een ingreep op de *generatieve startpositie* (premisse-eerst i.p.v. thema-eerst) verschoof de panel-scores wél sterk — al bleek datzelfde panel een onbetrouwbare detector, dus de uitkomst is suggestief, niet bewijzend.
+
 ---
 
-## 9. TL;DR — waar AI nu staat en waar het tekortschiet
+## 9. Fase 3 (mei 2026): het premisse-eerst-effect — en de kritische lezing
+
+Een latere fase stelde drie vragen: blijft het 6-8/10-plafond staan; is het de typografie die verraadt; en is er een aanpak die we misten?
+
+**Blindtest 7 — proza-tuning + typografie genivelleerd.** Een AI-verhaal (karper & snoek) werd chirurgisch herzien op alle bekende tells, en alle vier teksten gingen door één identieke pijplijn (rechte aanhalingstekens, gelijke spatiëring, herstelde alinea's, monospace render). AI bleef ~4,3-5,7/10, 3/3 geflagd. Conclusie: het waren niet de leestekens, en zinsniveau-tuning plateaut — consistent met fase 1-2.
+
+**De gap-hypothese.** We optimaliseerden steeds de *prozalaag*, terwijl de premisse naturalistisch bleef en het thema benoembaar. Hypothese: de hefboom is de *generatieve startpositie*, niet de zin — begin bij een concrete, absurde, letterlijk-genomen premisse (à la Tellegens nijlpaard-in-de-lucht), werk de logistiek deadpan uit, weiger een benoembaar thema, en optimaliseer niet (laat ruwheid staan).
+
+**Blindtest 8 & 9 — premisse-eerst (binnen-opzet-resultaat).**
+
+| Test | AI-verhaal | Protocol | Panel-score | Geflagd als AI |
+|---|---|---|---|---|
+| 8-bewijs | zeekomkommer | forced-choice | 9,5/10 | 0/3 |
+| 8-replicatie | zeekomkommer | forced-choice, 3 sterke reals | 10/10 | 0/3 |
+| 9 | olifant (klassieke dieren) | per-item (geen forced-choice) | 9/10 | 0/3 |
+
+Drie refinements zijn in de agents verwerkt: de premisse-eerste motor, een temporeel register (idioom ca. 1984-2004), en een regie-principe — de orchestrator neemt reviewersuggesties *niet klakkeloos* over, want over-correctie poetst productieve ruwheid weg en is zelf een tell.
+
+### Waarom dit GEEN aangetoonde doorbraak is
+
+Hetzelfde experiment ondermijnt zijn eigen sterke lezing. Vier confounds, van zwaar naar licht:
+
+1. **Circulaire beoordeling.** Schrijver én jury zijn hetzelfde modelfamilie (Claude). Een LLM die LLM-output op authenticiteit beoordeelt is vermoedelijk geneigd output die past bij zijn eigen prior als echt te zien. De 0/3 kan grotendeels dáárvan komen.
+2. **Onbetrouwbaar instrument.** Het panel flagde meerdere ECHTE Tellegens als AI (vergeetboek 3/3, "nu of nooit" 2/3) en gaf hetzelfde echte verhaal in verschillende runs tegengestelde oordelen (vergeetboek: eerst 9/9/9 "echt", later 3/3 "AI"). Als het instrument echt-van-echt niet scheidt, is non-detectie van onze AI zwak bewijs.
+3. **Geen stylometrie.** Detectie gebeurde door *lezen en gokken*. De literatuur detecteert AI stylometrisch (Burrows' Delta, AMNP) met >80%, ongeacht leeskwaliteit; dat is hier niet getoetst. "Plafond doorbroken" is in stylometrische zin ongefundeerd.
+4. **Zwakke opzet.** LLM-persona's i.p.v. menselijke experts; n=3 verhalen; niet-geblindeerde experimentator (dezelfde die ontwierp, koos en interpreteerde, met de hypothese in het hoofd); echte verhalen uit hun boekcontext gehaald en genormaliseerd (nadeel voor de reals).
+
+De verdedigbare conclusie is daarom smal: *binnen deze gebrekkige opzet* gaf premisse-eerst een groot effect op de oordelen van een aantoonbaar onbetrouwbaar LLM-panel. Dat is een bruikbare generatie-strategie-hint en een interessante negatieve bevinding over LLM-detectoren — geen capaciteitsclaim over ononderscheidbaarheid.
+
+### Hoe een zuivere meting eruit zou zien (vervolg)
+- Menselijke beoordelaars, niet hetzelfde modelfamilie als de schrijver.
+- Controle-items (bekend echt + bekend AI) door elkaar → sensitiviteit én specificiteit (ROC), niet alleen "vond het onze AI?".
+- Een stylometrische toets op de premisse-eerste verhalen (Burrows' Delta / n-gram-profiel).
+- Meer trials, pre-registratie, geblindeerde set-samenstelling.
+
+---
+
+## 10. TL;DR — fase 1-2 (herzien door fase 3)
+
+> **Let op:** onderstaande TL;DR vat fase 1-2 samen en stelde een structureel "6-8/10-plafond" vast bij prozagerichte tuning. Fase 3 (sectie 9) nuanceert dit op twee punten: (a) een andere *generatieve aanpak* (premisse-eerst) gaf binnen onze opzet veel hogere panel-scores, en (b) het LLM-panel bleek een onbetrouwbare detector. De claims hieronder over "detectie" en "het plafond" gelden dus alleen voor het zwakke LLM-panel-meetinstrument, niet als algemene capaciteits- of stylometrische uitspraak.
 
 **Wat AI op dit moment kan, anno mei 2026 (Claude Opus 4.7, EQ-Bench Creative Writing leider):**
 
@@ -293,7 +350,7 @@ Tellegen-stijl is een bijzonder zuivere stresstest hiervoor, omdat zijn werk geb
 
 ---
 
-## 10. Bronnen
+## 11. Bronnen
 
 - Beyond the surface: stylometric analysis of GPT-4o's capacity for literary style imitation — *Digital Scholarship in the Humanities* 40(2) 2025 — https://academic.oup.com/dsh/article/40/2/587/8118784
 - Catch Me If You Can? Not Yet: LLMs Still Struggle to Imitate the Implicit Writing Styles of Everyday Authors — EMNLP Findings 2025 / arXiv 2509.14543 — https://arxiv.org/html/2509.14543v1
