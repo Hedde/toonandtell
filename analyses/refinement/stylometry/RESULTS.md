@@ -60,3 +60,21 @@ Twee ingrepen op 3 premisse-eerste teksten:
 - Holistische herziening beweegt beide vingerafdrukken verwaarloosbaar en inconsistent (olifant zelfs slechter; wielewaal iets beter maar char3 blijft ver boven de echte max). Geen convergentie.
 
 **Conclusie:** de stylometrische afstand reflecteert de output-distributie van het model, niet de oppervlaktekeuzes die ons proces kan bijsturen. Kennis van de vingerafdruk levert via prompting/herziening **geen** scherper stylometrisch resultaat — consistent met de literatuur. Het sluiten van de gap zou ingrepen op modelniveau vergen (fine-tuning/DPO op een discriminator), buiten dit project.
+
+---
+
+## 7. Vervolg: oppervlakte-chirurgie vs vorm-matching (waarom de loop wél/niet werkt)
+Diagnose (`diag.py`) toonde dat de grootste MFW-afwijkingen van de zeekomkommer STRUCTUREEL/vorm-gedreven zijn, niet oppervlakte-tics: `zei`=0 (geen dialoog; Tellegen 14,6/1000), `het` veel te vaak, `de` veel te zelden, `was`/`werd` te vaak — kenmerken van een solo-descriptieve modus i.p.v. Tellegens dialoogvorm.
+
+Twee chirurgie-armen op de zeekomkommer (echt: MFW 0,765/max 0,945; char3 0,779/max 0,940):
+
+| arm | MFW-Delta | char3-Delta (held-out) |
+|---|---|---|
+| basis | 0,843 | 1,007 |
+| A — functiewoord-chirurgie (het→de, minder was/werd; vorm ongemoeid) | **0,906** (slechter) | 1,006 (onveranderd) |
+| B — vorm-matching (dialoog toegevoegd, premisse behouden) | **0,755** | **0,914** |
+
+- **Arm A faalt en verergert.** Functiewoorden lokaal forceren duwt andere features uit balans (whack-a-mole over 100 gecorreleerde dimensies) en raakt de structurele afwijking (zei=0) niet. Held-out char3 beweegt niet → geen vooruitgang.
+- **Arm B werkt echt.** Tellegens VORM matchen (dialoog-gedreven) bracht béíde vingerafdrukken binnen de Tellegen-spreiding; de niet-getargete char3 volgde mee → genuine convergentie, geen Goodhart.
+
+**Conclusie (verfijning van §6).** Een chirurgie/review-lus kan wél stylometrische vooruitgang boeken — maar alleen door de **compositievorm** te matchen (hier: dialoogdichtheid), niet via oppervlakte-woordkeuze. De vingerafdruk wordt gedomineerd door vorm. Kosten/voorbehoud: vorm-matching = convergeren naar Tellegens dialoog-mal (de solo-deadpan vorm-eigenheid verdwijnt), gevalideerd op n=1 en twee feature-families; een neurale/perplexiteits-detector kan nog steeds scheiden.
