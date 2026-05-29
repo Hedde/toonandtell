@@ -119,3 +119,19 @@ Bevindingen — **correctie op §7:**
 **De balans (bewezen):** systematische, terugkerende afwijkingen → **constraint in de agent** (groot, goedkoop, generaliseert); idiosyncratische rest → hooguit **één** surgical pass. Constraints doen het zware werk, surgery is marginale opschoning.
 
 **Terughoudendheid:** twee feature-families (MFW + char-3-gram), onze eigen harness, n klein (5), één auteur; constraints afgeleid van diezelfde auteur (char3 wél held-out van de ingreep). Een getrainde neurale/perplexiteits-detector, menselijke lezers en andere auteurs zijn niet getoetst. "Binnen ons stylometrische bereik" is niet "ononderscheidbaar". Generieke toepasbaarheid vergt meer empirisch werk (zie `PROTOCOL.md`).
+
+---
+
+## 10. Model-vergelijking (4.8 vs 4.6 vs 4.5; N=4 per model, taak constant)
+Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dieren (eekhoorn/mier/kreeft/mus); alleen het schrijfmodel varieert. Claude 4.7 was hier niet beschikbaar.
+
+| model | MFW-Delta | char3-Delta (held-out) | komma/100 | TTR |
+|---|---|---|---|---|
+| **Opus 4.8** | 0,870 | **0,906** | 6,2 | 0,45 |
+| Sonnet 4.6 | 0,859 | 1,117 | 5,3 | 0,43 |
+| Haiku 4.5 | 1,024 | 1,105 | 5,0 | 0,43 |
+| echt (ref) | 0,765 (max 0,945) | ~0,78 (per-verhaal 0,76–0,98) | 5,6 | 0,50 |
+
+**Bevinding:** op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (0,906, grotendeels binnen het echte bereik), duidelijk vóór Sonnet 4.6 (1,117) en Haiku 4.5 (1,105). Op MFW zijn 4.8 en 4.6 vergelijkbaar (0,87 vs 0,86); Haiku 4.5 is op beide het verst. Eerste *meetbare* indicatie van een modelbijdrage: het nieuwere/grotere model schrijft dichter bij de doelstijl op de scherpst onderscheidende vingerafdruk.
+
+**Voorbehoud:** N=4/model, één taak, één auteur, twee families, onze eigen harness; de register-constraints zijn deels afgeleid van 4.8-output (mogelijk mild in 4.8's voordeel). Indruk, geen ranglijst-bewijs; 4.7 ontbreekt. Een schone meting vraagt om meer N, meerdere taken/auteurs, een getrainde detector en menselijke raters (PROTOCOL.md §8).
