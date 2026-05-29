@@ -122,16 +122,17 @@ Bevindingen — **correctie op §7:**
 
 ---
 
-## 10. Model-vergelijking (4.8 vs 4.6 vs 4.5; N=4 per model, taak constant)
-Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dieren (eekhoorn/mier/kreeft/mus); alleen het schrijfmodel varieert. Claude 4.7 was hier niet beschikbaar.
+## 10. Model-vergelijking (4.8 vs 4.6 vs 4.5 vs Codex; N=4 per model, taak constant)
+Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dieren (eekhoorn/mier/kreeft/mus); alleen het schrijfmodel varieert. Claude 4.7 was hier niet beschikbaar. Codex is toegevoegd als extra arm, maar niet blind/schoon: de agent had de harness en eerdere resultaten in context.
 
 | model | MFW-Delta | char3-Delta (held-out) | komma/100 | TTR |
 |---|---|---|---|---|
 | **Opus 4.8** | 0,870 | **0,906** | 6,2 | 0,45 |
+| Codex | 0,921 | 1,051 | 4,5 | 0,44 |
 | Sonnet 4.6 | 0,859 | 1,117 | 5,3 | 0,43 |
 | Haiku 4.5 | 1,024 | 1,105 | 5,0 | 0,43 |
 | echt (ref) | 0,765 (max 0,945) | ~0,78 (per-verhaal 0,76–0,98) | 5,6 | 0,50 |
 
-**Bevinding:** op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (0,906, grotendeels binnen het echte bereik), duidelijk vóór Sonnet 4.6 (1,117) en Haiku 4.5 (1,105). Op MFW zijn 4.8 en 4.6 vergelijkbaar (0,87 vs 0,86); Haiku 4.5 is op beide het verst. Eerste *meetbare* indicatie van een modelbijdrage: het nieuwere/grotere model schrijft dichter bij de doelstijl op de scherpst onderscheidende vingerafdruk.
+**Bevinding:** op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (0,906, grotendeels binnen het echte bereik). Codex komt daarna (1,051): buiten het echte max-bereik, maar dichterbij dan Sonnet 4.6 (1,117) en Haiku 4.5 (1,105). Op MFW zijn 4.8 en 4.6 het sterkst; Codex zit daarachter maar vóór Haiku. Eerste *meetbare* indicatie van een modelbijdrage: het nieuwere/grotere Claude-model schrijft dichter bij de doelstijl op de scherpst onderscheidende vingerafdruk; Codex levert in deze niet-blinde arm geen verbetering op t.o.v. Opus 4.8.
 
-**Voorbehoud:** N=4/model, één taak, één auteur, twee families, onze eigen harness; de register-constraints zijn deels afgeleid van 4.8-output (mogelijk mild in 4.8's voordeel). Indruk, geen ranglijst-bewijs; 4.7 ontbreekt. Een schone meting vraagt om meer N, meerdere taken/auteurs, een getrainde detector en menselijke raters (PROTOCOL.md §8).
+**Voorbehoud:** N=4/model, één taak, één auteur, twee families, onze eigen harness; de register-constraints zijn deels afgeleid van 4.8-output (mogelijk mild in 4.8's voordeel). De Codex-arm is extra besmet: dezelfde sessie kende de meetopzet en de eerdere uitkomsten, dus dit is hooguit een praktische Codex-proef, geen eerlijke black-box benchmark. Indruk, geen ranglijst-bewijs; 4.7 ontbreekt. Een schone meting vraagt om meer N, meerdere taken/auteurs, een getrainde detector, menselijke raters en rolscheiding tussen schrijver en analist (PROTOCOL.md §8).

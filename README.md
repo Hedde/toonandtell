@@ -17,19 +17,18 @@ De uitkomst kent drie lagen:
 
 ### Repo-structuur
 
-- **`CLAUDE.md`** — de gevalideerde werkwijze, stapsgewijs (lees dit eerst bij vervolgwerk)
+- **[CLAUDE.md](CLAUDE.md)** — de gevalideerde werkwijze, stapsgewijs (lees dit eerst bij vervolgwerk)
 - **`.claude/agents/`** — vijf agent-definities (YAML-frontmatter + Markdown systeemprompt)
-- **`analyses/refinement/LEARNINGS.md`** — zo wetenschappelijk mogelijke samenvatting (wat wel/niet werkte, kerntabel, false-positive-bevinding)
-- **`analyses/refinement/PIPELINE.md`** — operationele stappen + `normalize.py`
+- **[LEARNINGS.md](analyses/refinement/LEARNINGS.md)** — zo wetenschappelijk mogelijke samenvatting (wat wel/niet werkte, kerntabel, false-positive-bevinding)
+- **[PIPELINE.md](analyses/refinement/PIPELINE.md)** — operationele stappen + `normalize.py`
 - **`analyses/`** — onderzoeksoutput per bundel, cross-boek synthese, blindtest-rapporten (1-9), literatuurscan
-- **`codex-review.md`** — interne audit van de review-revisie-cyclus
 - **`README.md`** — dit document; volledig sessieverslag
 
 ### Snel naar de kern
 
 - Wil je **het premisse-eerst-effect** en waarom we het niet als doorbraak mogen lezen? Secties 9 en 10.
-- Wil je **wat wel/niet werkte** + de confounds, beknopt? `analyses/refinement/LEARNINGS.md`.
-- Wil je de **methodologie**? Secties 2-3 (analyse) en `CLAUDE.md` (de gevalideerde pijplijn).
+- Wil je **wat wel/niet werkte** + de confounds, beknopt? [LEARNINGS.md](analyses/refinement/LEARNINGS.md).
+- Wil je de **methodologie**? Secties 2-3 (analyse) en [CLAUDE.md](CLAUDE.md) (de gevalideerde pijplijn).
 - Wil je de **blindtest-resultaten** fase 1-2? Secties 4 en 8.
 
 ---
@@ -194,18 +193,32 @@ De verdedigbare conclusie is daarom smal: *binnen deze gebrekkige opzet* gaf pre
 - Een plagiaat-audit (verbatim-overlap met het corpus) om stijlimitatie van tekstovername te scheiden.
 - Meer trials, pre-registratie, geblindeerde set-samenstelling.
 
-Het volledige rigoureuze ontwerp — inclusief de model-arm ("komt Claude 4.8 dichterbij, en wat draait het bij?") en de copyright-veilige plagiaat-audit — staat in **`analyses/refinement/PROTOCOL.md`**.
+Het volledige rigoureuze ontwerp — inclusief de model-arm ("komt Claude 4.8 dichterbij, en wat draait het bij?") en de copyright-veilige plagiaat-audit — staat in **[PROTOCOL.md](analyses/refinement/PROTOCOL.md)**.
 
 ### Stylometrische pilot + fingerprint-in-de-loop (de objectieve maatlat)
 
-Daarna is de eerste twee punten hierboven deels uitgevoerd met een lokale, niet-circulaire harness (`analyses/refinement/stylometry/`): een Burrows'-achtige MFW-Delta + een **held-out** karakter-3-gram-Delta + verbatim-overlap. Vier bevindingen (pilot, kleine n; `stylometry/RESULTS.md`):
+Daarna is de eerste twee punten hierboven deels uitgevoerd met een lokale, niet-circulaire harness (`analyses/refinement/stylometry/`): een Burrows'-achtige MFW-Delta + een **held-out** karakter-3-gram-Delta + verbatim-overlap. Vier bevindingen (pilot, kleine n; [RESULTS.md](analyses/refinement/stylometry/RESULTS.md)):
 
 - **Premisse-eerst ≈ thema-eerst stylometrisch.** MFW-Delta tot Tellegen: 0,850 vs 0,869 (verschil binnen de ruis). Het premisse-eerst-voordeel zat dus in de *leesindruk*, niet in de forensische vingerafdruk.
 - **Blijvende, modus-onafhankelijke tells:** AI gebruikt ~34% meer komma's dan Tellegen en heeft lagere lexicale diversiteit; premisse-eerst repareert dat niet. Een getrainde classifier zou AI vermoedelijk nog steeds scheiden.
-- **Fingerprint-in-de-loop — wat wél/niet werkt (na verificatie).** Oppervlakte-chirurgie (komma's/functiewoorden) én best-of-N-selectie sluiten de gap NIET (de held-out char3 volgt niet; r=0,40); per-tekst surgery helpt één pas en plateaut dan (Goodhart). **Wat wél sloot:** de *systematische* afwijkingen verplaatsen naar **register-constraints ín de agent** (generatie-tijd, voor terugkerende biases: minder was/niet/dan/nu, meer in/zijn/uit, komma's laag, tags variëren). Dat bracht de baseline op béíde families binnen het Tellegen-bereik, **inclusief de held-out char-3-gram** (5 teksten char3 0,82–0,91 vs 1,05–1,30; animal-confound uitgesloten via identieke dieren: reiger char3 1,30→0,90, kreeft 1,09→0,83), en de verhalen lezen goed. **De balans (bewezen): systematisch → constraint; idiosyncratisch → hooguit één surgical pass.** Voorbehoud: 2 families / onze harness / n klein / één auteur — geen bewijs van ononderscheidbaarheid voor neurale detectoren of mensen. Detail: `stylometry/RESULTS.md` §7-9.
+- **Fingerprint-in-de-loop — wat wél/niet werkt (na verificatie).** Oppervlakte-chirurgie (komma's/functiewoorden) én best-of-N-selectie sluiten de gap NIET (de held-out char3 volgt niet; r=0,40); per-tekst surgery helpt één pas en plateaut dan (Goodhart). **Wat wél sloot:** de *systematische* afwijkingen verplaatsen naar **register-constraints ín de agent** (generatie-tijd, voor terugkerende biases: minder was/niet/dan/nu, meer in/zijn/uit, komma's laag, tags variëren). Dat bracht de baseline op béíde families binnen het Tellegen-bereik, **inclusief de held-out char-3-gram** (5 teksten char3 0,82–0,91 vs 1,05–1,30; animal-confound uitgesloten via identieke dieren: reiger char3 1,30→0,90, kreeft 1,09→0,83), en de verhalen lezen goed. **De balans (bewezen): systematisch → constraint; idiosyncratisch → hooguit één surgical pass.** Voorbehoud: 2 families / onze harness / n klein / één auteur — geen bewijs van ononderscheidbaarheid voor neurale detectoren of mensen. Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §7-9.
 - **Geen plagiaat:** verbatim-overlap verwaarloosbaar (8-gram ≈ 0%; één eerlijk gemelde stockfrase-collisie).
 
 Dit alles **strookt met** de geciteerde literatuur en weerlegt die niet.
+
+### Model-vergelijking (4.8 vs 4.6 vs 4.5 vs Codex; N=4 per model, taak constant)
+
+Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dieren; alleen het schrijfmodel varieert. Claude 4.7 was niet beschikbaar; de **Codex-arm is niet blind** (de agent kende de meetopzet en eerdere uitkomsten).
+
+| model | MFW-Delta | char3-Delta (held-out) |
+|---|---|---|
+| **Opus 4.8** | 0,870 | **0,906** |
+| Codex | 0,921 | 1,051 |
+| Sonnet 4.6 | 0,859 | 1,117 |
+| Haiku 4.5 | 1,024 | 1,105 |
+| *echt (ref)* | 0,765 | ~0,78 (per-verhaal 0,76–0,98) |
+
+Op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (binnen het echte bereik), gevolgd door Codex, dan Haiku 4.5 en Sonnet 4.6. Eerste *meetbare* indicatie van een modelbijdrage — met de caveats (klein, één auteur, eigen harness, constraints deels van 4.8-data afgeleid; Codex-arm niet blind). Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §10.
 
 ---
 
@@ -226,12 +239,12 @@ Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 1. **Methodisch/generatief (positief, bescheiden).** Een meertraps analyse→generatie→review→blindtest-opzet werkt als onderzoeksinstrument, en één generatieve hefboom bleek robuust: *begin bij een concrete, absurde premisse, niet bij een thema, en optimaliseer niet.* Bruikbaar als schrijfstrategie — geen capaciteitsbewijs.
 2. **Meet-technisch (negatief — wellicht het stevigste resultaat).** LLM-panels zijn onbetrouwbare detectoren van literaire AI-imitatie: ze missen goede imitaties én beschuldigen authentiek werk, en hun oordeel is contextafhankelijk en instabiel. Wie "ononderscheidbaarheid" of "AI-detectie" claimt op basis van LLM-jury's, meet het instrument, niet de tekst.
 
-**Wat een stylometrische pilot daarna toevoegde.** Een lokale harness (MFW-Delta + held-out char-3-gram-Delta) gaf het antwoord op de open vraag: premisse-eerst verkleint de stilistische afstand tot Tellegen **niet** (0,850 vs 0,869 voor thema-eerst); het voordeel zat alleen in de leesindruk. Modus-onafhankelijke tells blijven, en per-tekst-surgery/best-of-N sluiten de gap niet. **Wat de gap (op onze twee families) wél sloot:** de systematische tells als **constraints in de agent** zetten — dat bracht de baseline binnen het Tellegen-bereik, inclusief de held-out char-3-gram (RESULTS §9). De balans: systematisch → constraint, idiosyncratisch → hooguit één surgical pass. Dit blijft een pilot (2 families, kleine n, geen getrainde classifier, geen menselijke raters) — geen vervanging van het volledige ontwerp in `PROTOCOL.md`.
+**Wat een stylometrische pilot daarna toevoegde.** Een lokale harness (MFW-Delta + held-out char-3-gram-Delta) gaf het antwoord op de open vraag: premisse-eerst verkleint de stilistische afstand tot Tellegen **niet** (0,850 vs 0,869 voor thema-eerst); het voordeel zat alleen in de leesindruk. Modus-onafhankelijke tells blijven, en per-tekst-surgery/best-of-N sluiten de gap niet. **Wat de gap (op onze twee families) wél sloot:** de systematische tells als **constraints in de agent** zetten — dat bracht de baseline binnen het Tellegen-bereik, inclusief de held-out char-3-gram (RESULTS §9). De balans: systematisch → constraint, idiosyncratisch → hooguit één surgical pass. Dit blijft een pilot (2 families, kleine n, geen getrainde classifier, geen menselijke raters) — geen vervanging van het volledige ontwerp in [PROTOCOL.md](analyses/refinement/PROTOCOL.md).
 
 **De zuivere bottom line (met balans optimisme/terughoudendheid).**
 - *Wat werkt (gefundeerd, behouden in het proces):* (1) **premisse-eerst** generatie verbetert de *leesindruk* sterk; (2) **systematische tells als constraints in de agent** brengen de *stylometrische* afstand (MFW + held-out char-3-gram) binnen het Tellegen-bereik — reproduceerbaar en confound-gecontroleerd; (3) één **data-gedreven surgical pass** ruimt het idiosyncratische residu op. Samen: constraints doen het zware werk, premisse-eerst de toon, surgery de rest.
 - *Wat niet werkt (geschrapt):* oppervlakte-woordchirurgie, iteratief doorpoetsen, en best-of-N-selectie — die gamen één metriek zonder transfer.
-- *Terughoudendheid (meer empirisch werk nodig):* dit is gemeten op twee feature-families met onze eigen harness, kleine n, één auteur, en met een LLM-jury die aantoonbaar onbetrouwbaar is. "Binnen ons stylometrische bereik én overtuigend voor een LLM-panel" is **niet** hetzelfde als "ononderscheidbaar voor een getrainde stylometrische classifier of voor menselijke experts". Die generieke claim vergt het ontwerp in `PROTOCOL.md` (menselijke raters, niet-circulaire/getrainde detector, controle-items, meer auteurs, pre-registratie). De wetenschappelijk best onderbouwde gap-sluiter blijft **fine-tunen op het oeuvre** (modelniveau, auteursrechtelijk gated) — buiten dit proces.
+- *Terughoudendheid (meer empirisch werk nodig):* dit is gemeten op twee feature-families met onze eigen harness, kleine n, één auteur, en met een LLM-jury die aantoonbaar onbetrouwbaar is. "Binnen ons stylometrische bereik én overtuigend voor een LLM-panel" is **niet** hetzelfde als "ononderscheidbaar voor een getrainde stylometrische classifier of voor menselijke experts". Die generieke claim vergt het ontwerp in [PROTOCOL.md](analyses/refinement/PROTOCOL.md) (menselijke raters, niet-circulaire/getrainde detector, controle-items, meer auteurs, pre-registratie). De wetenschappelijk best onderbouwde gap-sluiter blijft **fine-tunen op het oeuvre** (modelniveau, auteursrechtelijk gated) — buiten dit proces.
 
 ---
 
@@ -250,4 +263,4 @@ Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 - ParaGuide: Guided Diffusion Paraphrasers for Plug-and-Play Textual Style Transfer — arXiv 2308.15459 — https://arxiv.org/abs/2308.15459
 - LLM one-shot style transfer for Authorship Attribution and Verification — arXiv 2510.13302 — https://arxiv.org/abs/2510.13302
 
-**Praktijk-referenties (dit project, eigen metingen):** blindtests 1-9 (`analyses/refinement/`), stylometrie + plagiaat-audit + constraints-vs-surgery (`analyses/refinement/stylometry/RESULTS.md`), gevalideerde werkwijze (`CLAUDE.md`, `PIPELINE.md`), rigoureus vervolgontwerp (`PROTOCOL.md`).
+**Praktijk-referenties (dit project, eigen metingen):** blindtests 1-9 (`analyses/refinement/`), stylometrie + plagiaat-audit + constraints-vs-surgery ([RESULTS.md](analyses/refinement/stylometry/RESULTS.md)), gevalideerde werkwijze ([CLAUDE.md](CLAUDE.md), [PIPELINE.md](analyses/refinement/PIPELINE.md)), rigoureus vervolgontwerp ([PROTOCOL.md](analyses/refinement/PROTOCOL.md)).
