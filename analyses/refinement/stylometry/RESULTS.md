@@ -78,3 +78,19 @@ Twee chirurgie-armen op de zeekomkommer (echt: MFW 0,765/max 0,945; char3 0,779/
 - **Arm B werkt echt.** Tellegens VORM matchen (dialoog-gedreven) bracht béíde vingerafdrukken binnen de Tellegen-spreiding; de niet-getargete char3 volgde mee → genuine convergentie, geen Goodhart.
 
 **Conclusie (verfijning van §6).** Een chirurgie/review-lus kan wél stylometrische vooruitgang boeken — maar alleen door de **compositievorm** te matchen (hier: dialoogdichtheid), niet via oppervlakte-woordkeuze. De vingerafdruk wordt gedomineerd door vorm. Kosten/voorbehoud: vorm-matching = convergeren naar Tellegens dialoog-mal (de solo-deadpan vorm-eigenheid verdwijnt), gevalideerd op n=1 en twee feature-families; een neurale/perplexiteits-detector kan nog steeds scheiden.
+
+---
+
+## 8. Best-of-N + selectie — en CORRECTIE op §7 (eerst verifiëren)
+Hypothese: genereer N vorm-gematchte (dialoog-gedreven) premisse-eerst kandidaten, selecteer op MFW-Delta, valideer op de held-out char3. n=8 (mol, egel, reiger, kreeft, das, uil, mees, slak).
+
+**Harness-controle:** échte losse verhalen door `measure.py` → vergeetboek MFW 0,894 / char3 0,978; pinguïn MFW 0,824 / char3 0,763. Echte verhalen scoren dus laag (harness deugt); per-verhaal char3-bereik ~0,76–0,98.
+
+**Kandidaten:** MFW 0,82–0,98; char3 **1,05–1,30** — álle boven het echte bereik. MFW-beste = uil (0,824) maar char3 1,088. Pearson r(MFW,char3)=0,40 (zwak).
+
+Bevindingen — **correctie op §7:**
+- **Best-of-N + MFW-selectie sluit de gap niet.** Selectie op MFW transfereert nauwelijks naar char3 (r=0,40); de MFW-beste blijft op char3 ver buiten het echte bereik.
+- **char3 (karakter-trigram) is de discriminerende vingerafdruk**, niet MFW. AI clustert op char3 ≥1,05; echt ≤0,98. Dialoog-vorm verwijdert die gap NIET (n=8).
+- **De arm-B-uitkomst uit §7 (char3 0,914 "binnen") repliceert niet** — dat was een n=1-uitschieter. MFW is bovendien een zwakke discriminator (AI en echt overlappen), dus "binnen de MFW-spreiding" is zwak bewijs.
+
+**Netto, gecorrigeerd:** geen van de geteste prompt/proces-hefbomen (premisse, vorm, best-of-N-selectie) sluit de karakter-niveau-vingerafdruk betrouwbaar. De diepe vingerafdruk persisteert — consistent met de literatuur; alleen modelniveau-ingrepen (fine-tunen) zijn geïndiceerd. Wat de prompt/proces-laag wél oplevert is een betere léésindruk, geen stylometrische convergentie. (Bewaard: de 8 kandidaten als leesbaar materiaal; char3 + harness als gevalideerde maat. Vervallen als gap-closer: best-of-N en de n=1-vorm-claim.)
