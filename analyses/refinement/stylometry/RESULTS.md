@@ -94,3 +94,28 @@ Bevindingen — **correctie op §7:**
 - **De arm-B-uitkomst uit §7 (char3 0,914 "binnen") repliceert niet** — dat was een n=1-uitschieter. MFW is bovendien een zwakke discriminator (AI en echt overlappen), dus "binnen de MFW-spreiding" is zwak bewijs.
 
 **Netto, gecorrigeerd:** geen van de geteste prompt/proces-hefbomen (premisse, vorm, best-of-N-selectie) sluit de karakter-niveau-vingerafdruk betrouwbaar. De diepe vingerafdruk persisteert — consistent met de literatuur; alleen modelniveau-ingrepen (fine-tunen) zijn geïndiceerd. Wat de prompt/proces-laag wél oplevert is een betere léésindruk, geen stylometrische convergentie. (Bewaard: de 8 kandidaten als leesbaar materiaal; char3 + harness als gevalideerde maat. Vervallen als gap-closer: best-of-N en de n=1-vorm-claim.)
+
+---
+
+## 9. Constraints-in-de-agent vs per-tekst-surgery — de balans (bewezen)
+
+**(a) Iteratieve surgical loop** (mees; char3 = held-out): r0 MFW 0,931 / char3 1,140 → r1 0,906 / 1,016 → r2 0,914 / 1,072. Eén data-gedreven pas helpt (óók de held-out char3), de tweede plateaut/regresseert. Surgery = één corrigerende pas, geen monotone optimizer.
+
+**(b) Systematiek over 16 AI-teksten** (gem. z + richting-consistentie): consistent (≥80%) te vaak `was/niet/dan/nu`, te zelden `in/zijn/uit` (+ komma-overmaat, lage TTR) = systematisch → constraint. Wisselend per tekst (`zei/het/daar/naar`) = idiosyncratisch → surgery.
+
+**(c) Constraints in de agent** (systematische bevindingen als register-richtlijnen). Baseline ZONDER surgery (echt: MFW mean 0,765/max 0,945; char3 per-verhaal ~0,76–0,98):
+
+| tekst | MFW | char3 (held-out) |
+|---|---|---|
+| niet-constrained best-of-N (8, gem.) | 0,917 | 1,118 |
+| eekhoorn | 0,937 | 0,823 |
+| mier | 0,765 | 0,827 |
+| beer | 0,800 | 0,907 |
+| **reiger** (confound-controle, zelfde dier) | 0,952 → **0,795** | 1,296 → **0,896** |
+| **kreeft** (confound-controle, zelfde dier) | 0,903 → **0,677** | 1,085 → **0,825** |
+
+**Uitkomst:** constraints brengen de baseline op béíde families binnen het echte bereik — inclusief de held-out char3 — reproduceerbaar (5 teksten char3 0,82–0,91) en óók bij identieke exotische dieren (animal-confound uitgesloten). Teksten blijven goed leesbaar. Sterkste positieve hefboom van het project; het corrigeert de eerdere "geen enkele prompt/proces-hefboom sluit de gap".
+
+**De balans (bewezen):** systematische, terugkerende afwijkingen → **constraint in de agent** (groot, goedkoop, generaliseert); idiosyncratische rest → hooguit **één** surgical pass. Constraints doen het zware werk, surgery is marginale opschoning.
+
+**Terughoudendheid:** twee feature-families (MFW + char-3-gram), onze eigen harness, n klein (5), één auteur; constraints afgeleid van diezelfde auteur (char3 wél held-out van de ingreep). Een getrainde neurale/perplexiteits-detector, menselijke lezers en andere auteurs zijn niet getoetst. "Binnen ons stylometrische bereik" is niet "ononderscheidbaar". Generieke toepasbaarheid vergt meer empirisch werk (zie `PROTOCOL.md`).

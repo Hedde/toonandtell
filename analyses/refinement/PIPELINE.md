@@ -21,3 +21,9 @@ Dit is de werkwijze zoals die zich in blindtest7-8 heeft uitgekristalliseerd. Zi
 
 ## normalize.py
 Twee modi: `real` (ontwrapt pdftotext-output via eindleesteken + niet-volle-regel + dialoog-aanhalingsteken-heuristiek) en `canonical` (respecteert bestaande witregel-alinea's). Beide leveren dezelfde canonieke vorm.
+
+## Meet-gedreven verbeterlus (constraints vs surgery — gevalideerd, RESULTS §9)
+Nadat je teksten met de harness meet (`stylometry/measure.py`: MFW-Delta + held-out char-3-gram-Delta), splits de afwijkingen:
+1. **Systematisch** (keert over meerdere teksten consistent terug, bv. te veel `was/niet/dan/nu`, te weinig `in/zijn/uit`, komma-overmaat, lage variatie) → leg vast als **register-constraint in de schrijfagent** (generatie-tijd). Dit verschoof in de test de hele baseline binnen het Tellegen-bereik op beide vingerafdruk-families.
+2. **Idiosyncratisch** (per tekst wisselend, bv. `zei/het/daar/naar`) → hooguit **één** data-gedreven surgical pass; itereren plateaut/regresseert (Goodhart).
+Valideer altijd op een **held-out** maat (char-3-gram) die de ingreep niet targette, om gaming te betrappen. Voorbehoud: gevalideerd op 2 families/onze harness/één auteur — geen bewijs van ononderscheidbaarheid voor andere detectoren of mensen.

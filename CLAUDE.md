@@ -37,3 +37,9 @@ Vier teksten in een geïsoleerde map met OPAKE namen, geen sleutel/sprekende buu
 - Prozapoetswerk en typografie-normalisatie verhogen de score nauwelijks (AI bleef ~5/10, detectie 3/3).
 - **Premisse-eerst** brak het plafond: gerepliceerd 9,5-10/10, detectie 0/3, tegen sterke én canonieke echte verhalen.
 - De detector heeft een hoge **false-positive-rate** op Tellegens discursieve/psychologische verhalen — lees detectiecijfers met dat voorbehoud.
+
+## Meet-gedreven verbetering: constraints vs surgery (gevalideerd, RESULTS §9)
+Na meting met de stylometrie-harness (MFW-Delta + held-out char-3-gram-Delta), splits afwijkingen:
+- **Systematisch** (keert consistent terug over teksten: te veel was/niet/dan/nu, te weinig in/zijn/uit, komma-overmaat, lage variatie) → vastleggen als **register-constraints in `toon-tellegen-schrijver`** (generatie-tijd). Dit bracht in de test de baseline op béíde vingerafdruk-families binnen het Tellegen-bereik (incl. de held-out char3), confound-gecontroleerd.
+- **Idiosyncratisch** (per tekst wisselend: zei/het/daar/naar) → hooguit **één** data-gedreven surgical pass; itereren plateaut (Goodhart).
+Valideer op een held-out maat. Voorbehoud: gevalideerd op 2 families/onze harness/één auteur — geen ononderscheidbaarheids-claim voor neurale detectoren of mensen (zie PROTOCOL.md).
