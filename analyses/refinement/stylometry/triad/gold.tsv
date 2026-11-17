@@ -1,0 +1,13 @@
+# nr	bundel	pagina's	woorden	gold-bestand (gitignored)
+01	djw	38-39	363	stylometry/raw/gold_01_djw_p38.txt
+02	djw	24-25	416	stylometry/raw/gold_02_djw_p24.txt
+03	djw	35-36	480	stylometry/raw/gold_03_djw_p35.txt
+04	ehodr	34-35	374	stylometry/raw/gold_04_ehodr_p34.txt
+05	ehodr	13-14	455	stylometry/raw/gold_05_ehodr_p13.txt
+06	ehodr	24-25	530	stylometry/raw/gold_06_ehodr_p24.txt
+07	mnuhh	12-13	354	stylometry/raw/gold_07_mnuhh_p12.txt
+08	mnuhh	32-33	436	stylometry/raw/gold_08_mnuhh_p32.txt
+09	mnuhh	14-15	439	stylometry/raw/gold_09_mnuhh_p14.txt
+10	mhez	9-10	430	stylometry/raw/gold_10_mhez_p09.txt
+11	mhez	35-36	466	stylometry/raw/gold_11_mhez_p35.txt
+12	mhez	13-14	580	stylometry/raw/gold_12_mhez_p13.txt
