@@ -1,0 +1,13 @@
+# gold	A = ander echt verhaal (gitignored)	B = oud niet-constrained AI-verhaal
+stylometry/raw/gold_01_djw_p38.txt	stylometry/raw/gold_ctrl_01_mnuhh_p24.txt	stylometry/bestofn/das.txt
+stylometry/raw/gold_02_djw_p24.txt	stylometry/raw/gold_ctrl_02_mnuhh_p22.txt	stylometry/bestofn/egel.txt
+stylometry/raw/gold_03_djw_p35.txt	stylometry/raw/gold_ctrl_03_mnuhh_p20.txt	stylometry/bestofn/kreeft.txt
+stylometry/raw/gold_04_ehodr_p34.txt	stylometry/raw/gold_ctrl_04_mnuhh_p18.txt	stylometry/bestofn/mees.txt
+stylometry/raw/gold_05_ehodr_p13.txt	stylometry/raw/gold_ctrl_05_mnuhh_p11.txt	stylometry/bestofn/mol.txt
+stylometry/raw/gold_06_ehodr_p24.txt	stylometry/raw/gold_ctrl_06_ehodr_p19.txt	stylometry/bestofn/reiger.txt
+stylometry/raw/gold_07_mnuhh_p12.txt	stylometry/raw/gold_ctrl_07_ehodr_p17.txt	stylometry/bestofn/slak.txt
+stylometry/raw/gold_08_mnuhh_p32.txt	stylometry/raw/gold_ctrl_08_ehodr_p09.txt	stylometry/bestofn/uil.txt
+stylometry/raw/gold_09_mnuhh_p14.txt	stylometry/raw/gold_ctrl_09_djw_p40.txt	stylometry/ai_premise/wesp.txt
+stylometry/raw/gold_10_mhez_p09.txt	stylometry/raw/gold_ctrl_10_djw_p31.txt	stylometry/ai_premise/wielewaal.txt
+stylometry/raw/gold_11_mhez_p35.txt	stylometry/raw/gold_ctrl_11_djw_p26.txt	stylometry/ai_premise/zeearend.txt
+stylometry/raw/gold_12_mhez_p13.txt	stylometry/raw/gold_ctrl_12_djw_p15.txt	stylometry/ai_theme/karper_gemis.txt

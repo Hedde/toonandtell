@@ -1,0 +1,13 @@
+# gold	concept A (volledige agent)	concept B (kale variant)
+stylometry/raw/gold_01_djw_p38.txt	stylometry/triad/A_01.txt	stylometry/triad/B_01.txt
+stylometry/raw/gold_02_djw_p24.txt	stylometry/triad/A_02.txt	stylometry/triad/B_02.txt
+stylometry/raw/gold_03_djw_p35.txt	stylometry/triad/A_03.txt	stylometry/triad/B_03.txt
+stylometry/raw/gold_04_ehodr_p34.txt	stylometry/triad/A_04.txt	stylometry/triad/B_04.txt
+stylometry/raw/gold_05_ehodr_p13.txt	stylometry/triad/A_05.txt	stylometry/triad/B_05.txt
+stylometry/raw/gold_06_ehodr_p24.txt	stylometry/triad/A_06.txt	stylometry/triad/B_06.txt
+stylometry/raw/gold_07_mnuhh_p12.txt	stylometry/triad/A_07.txt	stylometry/triad/B_07.txt
+stylometry/raw/gold_08_mnuhh_p32.txt	stylometry/triad/A_08.txt	stylometry/triad/B_08.txt
+stylometry/raw/gold_09_mnuhh_p14.txt	stylometry/triad/A_09.txt	stylometry/triad/B_09.txt
+stylometry/raw/gold_10_mhez_p09.txt	stylometry/triad/A_10.txt	stylometry/triad/B_10.txt
+stylometry/raw/gold_11_mhez_p35.txt	stylometry/triad/A_11.txt	stylometry/triad/B_11.txt
+stylometry/raw/gold_12_mhez_p13.txt	stylometry/triad/A_12.txt	stylometry/triad/B_12.txt

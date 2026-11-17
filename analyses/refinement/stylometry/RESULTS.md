@@ -136,3 +136,65 @@ Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dier
 **Bevinding:** op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (0,906, grotendeels binnen het echte bereik). Codex komt daarna (1,051): buiten het echte max-bereik, maar dichterbij dan Sonnet 4.6 (1,117) en Haiku 4.5 (1,105). Op MFW zijn 4.8 en 4.6 het sterkst; Codex zit daarachter maar vóór Haiku. Eerste *meetbare* indicatie van een modelbijdrage: het nieuwere/grotere Claude-model schrijft dichter bij de doelstijl op de scherpst onderscheidende vingerafdruk; Codex levert in deze niet-blinde arm geen verbetering op t.o.v. Opus 4.8.
 
 **Voorbehoud:** N=4/model, één taak, één auteur, twee families, onze eigen harness; de register-constraints zijn deels afgeleid van 4.8-output (mogelijk mild in 4.8's voordeel). De Codex-arm is extra besmet: dezelfde sessie kende de meetopzet en de eerdere uitkomsten, dus dit is hooguit een praktische Codex-proef, geen eerlijke black-box benchmark. Indruk, geen ranglijst-bewijs; 4.7 ontbreekt. Een schone meting vraagt om meer N, meerdere taken/auteurs, een getrainde detector, menselijke raters en rolscheiding tussen schrijver en analist (PROTOCOL.md §8).
+
+---
+
+## 11. Gold-triad: volledige schrijfagent vs kale variant (n=12, vooraf vastgelegd)
+
+**Datum:** 2026-11-17. **Vraag:** schrijft de volledige `toon-tellegen-schrijver` (429 regels, 27 skills) dichter bij Tellegen dan een kale variant met alleen premisse-eerst, temporeel register en register-constraints?
+
+**Opzet.** 12 echte verhalen als gold (3 per bundel, 354–580 woorden, mechanisch gekozen met `triad/select_gold.py`; uit: wat de agent-prompt citeert of oproept en wat in eerdere blindtests zat). Per gold schreef een aparte agent een inhoudsbrief uit de PDF; alle 12 delen geen reeks van ≥5 woorden met hun gold (`triad/check_brief.py`; 4-gram-overlap ≤0,9%).
+Per brief twee concepten met hetzelfde model (`claude-opus-5-5`), elk in een schone context met alleen system prompt + brief: **A** = de volledige agent-body, **B** = regels 15–44 van dezelfde prompt (`triad/arm_B_system.md`). Geen review, geen surgery, geen selectie op kwaliteit.
+Rechter: `triad.py` (afstand tot het gold, MFW + char3). Opzet en beslisregel zijn gecommit vóór het eerste concept bestond (`e0c390c`).
+
+**Beslisregel (vooraf).** Alleen een bevinding als één arm op béíde families wint met tweezijdige tekentoets p<0,05 (n=12: ≥10 van 12). Alles daaronder = geen aantoonbaar verschil.
+
+### Gemeten
+
+| # | gold | woorden gold / A / B | MFW A | MFW B | win | char3 A | char3 B | win | gold-echo A / B |
+|---|---|---|---|---|---|---|---|---|---|
+| 01 | djw p38 | 363 / 398 / 380 | 0,548 | 0,551 | A | 0,634 | 0,635 | A | 13,1% / 12,6% |
+| 02 | djw p24 | 416 / 473 / 438 | 0,649 | 0,566 | B | 0,719 | 0,671 | B | 12,7% / 6,8% |
+| 03 | djw p35 | 480 / 519 / 524 | 0,474 | 0,452 | B | 0,585 | 0,543 | B | 17,1% / 14,1% |
+| 04 | ehodr p34 | 374 / 402 / 402 | 0,595 | 0,557 | B | 0,671 | 0,663 | B | 14,2% / 11,9% |
+| 05 | ehodr p13 | 455 / 496 / 498 | 0,655 | 0,565 | B | 0,747 | 0,654 | B | 4,6% / 1,6% |
+| 06 | ehodr p24 | 530 / 604 / 588 | 0,458 | 0,461 | A | 0,648 | 0,613 | B | 9,6% / 13,8% |
+| 07 | mnuhh p12 | 354 / 395 / 357 | 0,633 | 0,600 | B | 0,745 | 0,727 | B | 3,0% / 9,2% |
+| 08 | mnuhh p32 | 436 / 451 / 457 | 0,590 | 0,506 | B | 0,664 | 0,578 | B | 6,7% / 8,3% |
+| 09 | mnuhh p14 | 439 / 469 / 461 | 0,620 | 0,620 | A (<0,001) | 0,741 | 0,655 | B | 2,8% / 3,5% |
+| 10 | mhez p09 | 430 / 435 / 484 | 0,524 | 0,710 | A | 0,792 | 0,787 | B | 3,0% / 1,9% |
+| 11 | mhez p35 | 466 / 530 / 508 | 0,476 | 0,474 | B | 0,558 | 0,520 | B | 7,2% / 18,5% |
+| 12 | mhez p13 | 580 / 676 / 651 | 0,565 | 0,531 | B | 0,578 | 0,598 | A | 4,0% / 7,1% |
+
+*Gold-echo = aandeel van de woorden van het concept dat in een letterlijke reeks van ≥8 woorden uit het eigen gold valt (`triad/gold_echo.py`).*
+
+**Winstpercentages.** MFW: A wint 4/12 (33%), B 8/12, p=0,388. char3: A wint 2/12 (17%), B 10/12, **p=0,039**. Beide families eens: A 1, B 7, verdeeld 4. Gemiddelde afstand tot het gold: MFW A 0,566 / B 0,549; char3 A 0,673 / B 0,637. Vier (MFW) en drie (char3) triades zijn beslist met een marge <0,01.
+
+**Afstand tot het corpus-profiel (`measure.py`, gemiddeld over 12):**
+
+| arm | MFW-Delta | char3-Delta | komma/100 | TTR |
+|---|---|---|---|---|
+| A volledige agent | 0,728 (sd 0,059; 0,66–0,88) | 0,786 (sd 0,078; 0,63–0,91) | 5,2 | 0,52 |
+| B kale variant | 0,744 (sd 0,066; 0,63–0,87) | 0,793 (sd 0,091; 0,65–0,95) | 4,0 | 0,51 |
+| echt (ref) | 0,765 (max 0,945) | 0,779 (max 0,940) | 5,6 | 0,50 |
+
+A ligt dichter bij het profiel dan B in 6/12 (MFW) en 7/12 (char3) paren. Beide armen liggen op het echte gemiddelde; alleen B_07 (char3 0,946) valt net boven het echte maximum.
+
+**Controles.**
+- **Lengte.** Alle 24 concepten zijn langer dan hun gold: A gemiddeld +9,6%, B +7,6%. De lengtepoort (±15%, hooguit 3 pogingen, vooraf vastgelegd) zette 8 concepten ongemeten opzij (A 6, B 2; `triad/generation_log.tsv`). A_12 bleef na drie pogingen op +16,6% en is zo meegenomen: één concept buiten de marge.
+- **8-gram-overlap met het corpus: de controle faalt.** Alle 24 concepten delen 8-grams met het corpus (0,2–7,6%; A gem. 2,9%, B 3,5%), vrijwel uitsluitend met het éígen gold (rest van het corpus gemiddeld <0,1%, hoogstens 1,0%). Per concept gemiddeld bijna vier letterlijke reeksen van ≥8 woorden, de langste 19 (A) en 21 (B) woorden; samen 8,2% (A) en 9,1% (B) van de tekst, uitschieters tot 18,5%. In 64 van de 91 reeksen staat minstens één inhoudswoord dat nergens in de brief voorkomt.
+- **Positieve controle van de rechter** (vóór de meting gedraaid, `triad/manifest_control.tsv`): een ánder echt Tellegen-verhaal tegenover een oud niet-constrained AI-verhaal uit §8. Het echte verhaal wint op char3 9/12 (p=0,146) en op MFW 4/12 (p=0,388). Volgens de beslisregel hierboven is dus zelfs echt-tegen-oud-AI geen bevinding. Inhoud was hier niet gelijkgetrokken (afstanden 0,84–1,53 tegen 0,45–0,79 in het experiment).
+- **`triad.py` zelf.** Draait foutloos op het echte corpus, is herhaalbaar (twee runs identiek) en volgorde-onafhankelijk (armen omgewisseld geeft gespiegeld 8/12 en 10/12 met dezelfde p). Eén afwijking, niet gerepareerd: de MFW-lijst verschilt in 1 van de 100 woorden van `measure.py`. Op rang 100 staan `we` en `mij` gelijk (47×); `measure.py` sorteert alleen op frequentie en houdt `we`, `triad.py` sorteert bij gelijkstand alfabetisch en houdt `mij`. De char3-lijst is identiek.
+
+### Afgeleid
+
+- **Geen aanwijzing dat de volledige agent dichter bij Tellegen schrijft.** De richting wijst eerder naar de kale variant (op beide families gemiddeld dichter bij het gold), maar alleen char3 haalt de drempel. Op het corpus-profiel zijn de armen gelijk.
+- **De ruim 380 regels buiten de drie secties leveren op deze twee families niets meetbaars op.** Dat is smaller dan "de gids is overbodig": de brief legt dieren, premisse en verloop vast, dus alles wat de volledige prompt doet aan premisse-keuze, architectuur en slot kan hier niet meetellen. Gemeten is alleen het register op zinsniveau.
+- **De triade meet deels reproductie van het origineel.** De letterlijke reeksen staan niet in de briefs en komen in beide armen voor. Ze komen dus óf uit het geheugen van het model, óf uit een brief die zo gedetailleerd is (582–834 woorden, langer dan de verhalen zelf) dat de eenvoudigste Tellegen-zin samenvalt met de echte. Deze opzet kan die twee niet scheiden. De echo is over de armen ongeveer gelijk en de arm met de meeste echo wint char3 in 6/12 triades; hij verklaart de richting dus niet, maar maakt "afstand tot het gold" een onzuivere stijlmaat.
+- **Het instrument is bij n=12 zwak.** De positieve controle haalt de regel niet. "Geen aantoonbaar verschil" betekent hier daarom "niet aangetoond", niet "aangetoond gelijk".
+
+**Terughoudendheid.** n=12, één model, één auteur, twee families, eigen harness. Eén concept per cel: de variatie tussen twee runs van dezelfde arm is niet gemeten en kan even groot zijn als het verschil tussen de armen. Het gold zit ook in het referentiecorpus waarop gestandaardiseerd wordt (klein effect, beide armen gelijk). A is gemiddeld iets langer dan B. De agent-prompt ging als system prompt de CLI in (`claude -p --safe-mode`), niet als geregistreerde subagent; de CLI voegt aan beide armen hetzelfde omgevingsblok toe. Het user-bericht schreef voor beide armen enkele aanhalingstekens voor, omdat quote-trigrammen in de char3-top-300 zitten. De 24 concepten bevatten door de gold-echo letterlijke bronfragmenten en staan daarom alleen lokaal (`triad/A_*.txt`, `triad/B_*.txt`), niet in git.
+
+**Uitkomst.** Geen aantoonbaar verschil volgens de vooraf vastgelegde regel: de kale variant won op char3 10/12 (p=0,039) maar op MFW slechts 8/12 (p=0,388), dus de volledige agent schrijft op deze maten niet aantoonbaar dichter bij Tellegen dan de kale.
+
+**Vervolgvoorstel (niet uitgevoerd).** (1) Gold dat het model niet kan kennen, of grovere briefs (premisse plus drie stappen), zodat de echo verdwijnt. (2) Meerdere concepten per cel om de variatie binnen een arm te schatten. (3) Een arm "geen gids" en een tweede model, zoals bij Taylor/Every. (4) Heranalyse met de letterlijke reeksen gemaskeerd. (5) Meer triades (n≥30) of een toets op de marges in plaats van alleen het teken. (6) De tie-break in `triad.py` en `measure.py` gelijktrekken.
