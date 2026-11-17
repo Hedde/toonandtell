@@ -6,14 +6,15 @@
 
 ## Over dit project
 
-Experimenteel, **educatief** onderzoeksproject naar stilistische AI-imitatie van Toon Tellegens werk, opgezet als pipeline van vijf gespecialiseerde Claude-agents (linguïst, neerlandicus, redacteur, fan, schrijver). Negen blindtests en meerdere tuningrondes in drie fasen.
+Experimenteel, **educatief** onderzoeksproject naar stilistische AI-imitatie van Toon Tellegens werk, opgezet als pipeline van vijf gespecialiseerde Claude-agents (linguïst, neerlandicus, redacteur, fan, schrijver). Negen blindtests en meerdere tuningrondes in drie fasen, gevolgd door een vierde fase met deterministische metingen op de nieuwste modellen (Opus 5.5 en Fable 5.2).
 
-> **Belangrijk methodologisch voorbehoud vooraf.** Alle "beoordelaars" in dit project zijn LLM-agents (Claude), géén menselijke experts. De schrijfagent is hetzelfde modelfamilie als de jury. Detectie gebeurt door *lezen en gokken*, niet stylometrisch. De getallen hieronder zijn dáárom indicatief, niet bewijzend — zie sectie 10 voor de volledige lijst confounds. Lees "0/3 herkend" als "dit specifieke, aantoonbaar onbetrouwbare LLM-panel flagde het niet", niet als "ononderscheidbaar voor mensen of voor stylometrie".
+> **Belangrijk methodologisch voorbehoud vooraf.** Alle "beoordelaars" in dit project zijn LLM-agents (Claude), géén menselijke experts. De schrijfagent is hetzelfde modelfamilie als de jury. Detectie gebeurt door *lezen en gokken*, niet stylometrisch. De getallen hieronder zijn dáárom indicatief, niet bewijzend — zie sectie 11 voor de volledige lijst confounds. Lees "0/3 herkend" als "dit specifieke, aantoonbaar onbetrouwbare LLM-panel flagde het niet", niet als "ononderscheidbaar voor mensen of voor stylometrie".
 
-De uitkomst kent drie lagen:
+De uitkomst kent vier lagen:
 1. Een werkende methodische opzet voor stilistische analyse via meervoudige agents (fase 1-2).
 2. Bij prozagerichte prompt-tuning bleef het LLM-panel alle AI-verhalen herkennen, met scores rond **6-8/10** (fase 1-2) — destijds geïnterpreteerd als een structureel plafond.
 3. **Fase 3:** een andere *generatieve aanpak* — **premisse-eerst** in plaats van thema-eerst — leverde binnen deze opzet een groot effect op (panel-scores ~9-10/10, 0/3 geflagd, over drie verhalen incl. klassieke dieren). MAAR datzelfde experiment toonde dat het panel een **onbetrouwbaar meetinstrument** is: het bestempelde meerdere échte Tellegen-verhalen als AI, en gaf hetzelfde echte verhaal in verschillende runs tegengestelde oordelen. Het grote effect is dus suggestief, niet bewijzend; het "plafond" is niet aantoonbaar doorbroken in stylometrische of menselijke zin.
+4. **Fase 4 (november 2026):** metingen zonder LLM-jury op **Opus 5.5** en **Fable 5.2**. De volledige schrijfagent (429 regels) schrijft niet aantoonbaar dichter bij Tellegen dan een kale variant van 30 regels. Een getrainde detector scheidt álle varianten vrijwel perfect van echte Tellegen, en de gids maakt de tekst op deze modellen uniformer en daardoor *makkelijker* te detecteren dan helemaal geen gids. De register-constraints uit fase 3 zijn afgeleid van Opus 4.8 en schieten op de nieuwe modellen door.
 
 ### Repo-structuur
 
@@ -26,7 +27,8 @@ De uitkomst kent drie lagen:
 
 ### Snel naar de kern
 
-- Wil je **het premisse-eerst-effect** en waarom we het niet als doorbraak mogen lezen? Secties 9 en 10.
+- Wil je **de nieuwste meting** (Opus 5.5 en Fable 5.2, met en zonder gids)? Sectie 10 en [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §11-12.
+- Wil je **het premisse-eerst-effect** en waarom we het niet als doorbraak mogen lezen? Secties 9 en 11.
 - Wil je **wat wel/niet werkte** + de confounds, beknopt? [LEARNINGS.md](analyses/refinement/LEARNINGS.md).
 - Wil je de **methodologie**? Secties 2-3 (analyse) en [CLAUDE.md](CLAUDE.md) (de gevalideerde pijplijn).
 - Wil je de **blindtest-resultaten** fase 1-2? Secties 4 en 8.
@@ -201,7 +203,7 @@ Daarna is de eerste twee punten hierboven deels uitgevoerd met een lokale, niet-
 
 - **Premisse-eerst ≈ thema-eerst stylometrisch.** MFW-Delta tot Tellegen: 0,850 vs 0,869 (verschil binnen de ruis). Het premisse-eerst-voordeel zat dus in de *leesindruk*, niet in de forensische vingerafdruk.
 - **Blijvende, modus-onafhankelijke tells:** AI gebruikt ~34% meer komma's dan Tellegen en heeft lagere lexicale diversiteit; premisse-eerst repareert dat niet. Een getrainde classifier zou AI vermoedelijk nog steeds scheiden.
-- **Fingerprint-in-de-loop — wat wél/niet werkt (na verificatie).** Oppervlakte-chirurgie (komma's/functiewoorden) én best-of-N-selectie sluiten de gap NIET (de held-out char3 volgt niet; r=0,40); per-tekst surgery helpt één pas en plateaut dan (Goodhart). **Wat wél sloot:** de *systematische* afwijkingen verplaatsen naar **register-constraints ín de agent** (generatie-tijd, voor terugkerende biases: minder was/niet/dan/nu, meer in/zijn/uit, komma's laag, tags variëren). Dat bracht de baseline op béíde families binnen het Tellegen-bereik, **inclusief de held-out char-3-gram** (5 teksten char3 0,82–0,91 vs 1,05–1,30; animal-confound uitgesloten via identieke dieren: reiger char3 1,30→0,90, kreeft 1,09→0,83), en de verhalen lezen goed. **De balans (bewezen): systematisch → constraint; idiosyncratisch → hooguit één surgical pass.** Voorbehoud: 2 families / onze harness / n klein / één auteur — geen bewijs van ononderscheidbaarheid voor neurale detectoren of mensen. Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §7-9.
+- **Fingerprint-in-de-loop — wat wél/niet werkt (na verificatie).** Oppervlakte-chirurgie (komma's/functiewoorden) én best-of-N-selectie sluiten de gap NIET (de held-out char3 volgt niet; r=0,40); per-tekst surgery helpt één pas en plateaut dan (Goodhart). **Wat wél sloot:** de *systematische* afwijkingen verplaatsen naar **register-constraints ín de agent** (generatie-tijd, voor terugkerende biases: minder was/niet/dan/nu, meer in/zijn/uit, komma's laag, tags variëren). Dat bracht de baseline op béíde families binnen het Tellegen-bereik, **inclusief de held-out char-3-gram** (5 teksten char3 0,82–0,91 vs 1,05–1,30; animal-confound uitgesloten via identieke dieren: reiger char3 1,30→0,90, kreeft 1,09→0,83), en de verhalen lezen goed. **De balans (bewezen): systematisch → constraint; idiosyncratisch → hooguit één surgical pass.** Voorbehoud: 2 families / onze harness / n klein / één auteur — geen bewijs van ononderscheidbaarheid voor neurale detectoren of mensen. Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §7-9. **Gecorrigeerd in fase 4 (sectie 10):** dit hield alleen op deze afstandsmaat en voor Opus 4.8.
 - **Geen plagiaat:** verbatim-overlap verwaarloosbaar (8-gram ≈ 0%; één eerlijk gemelde stockfrase-collisie).
 
 Dit alles **strookt met** de geciteerde literatuur en weerlegt die niet.
@@ -218,11 +220,50 @@ Zelfde taak (premisse-eerst + dialoog + register-constraints) en dezelfde 4 dier
 | Haiku 4.5 | 1,024 | 1,105 |
 | *echt (ref)* | 0,765 | ~0,78 (per-verhaal 0,76–0,98) |
 
-Op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (binnen het echte bereik), gevolgd door Codex, dan Haiku 4.5 en Sonnet 4.6. Eerste *meetbare* indicatie van een modelbijdrage — met de caveats (klein, één auteur, eigen harness, constraints deels van 4.8-data afgeleid; Codex-arm niet blind). Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §10.
+Op de discriminerende held-out char-3-gram ligt **Opus 4.8 het dichtst bij Tellegen** (binnen het echte bereik), gevolgd door Codex, dan Haiku 4.5 en Sonnet 4.6. Eerste *meetbare* indicatie van een modelbijdrage — met de caveats (klein, één auteur, eigen harness, constraints deels van 4.8-data afgeleid; Codex-arm niet blind). Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §10. Voor Opus 5.5 en Fable 5.2: zie sectie 10 hieronder.
 
 ---
 
-## 10. TL;DR — geïntegreerde, objectieve conclusie (alle fases samen)
+## 10. Fase 4 (november 2026): werkt de gids nog op Opus 5.5 en Fable 5.2?
+
+Aanleiding was een vergelijkbaar experiment (Mike Taylor, Every, november 2026) waarin een door Claude geschreven stijlgids verloor van geoptimaliseerde varianten, en bij het sterkste model zelfs van "geen gids". De vraag: geldt dat ook voor deze schrijfagent? Twee metingen, beide deterministisch (geen LLM-jury) en beide met een beslisregel die is gecommit vóór het eerste concept bestond. Detail: [RESULTS.md](analyses/refinement/stylometry/RESULTS.md) §11-12.
+
+### Meting 1 — gold-triad: een echt verhaal navertellen
+
+Twaalf echte verhalen, elk samengevat in een inhoudsbrief; per brief één concept van de volledige agent en één van een kale variant (alleen premisse-eerst, temporeel register en register-constraints). Een rechter kiest welk concept dichter bij het origineel ligt.
+
+- **Geen aantoonbaar verschil** tussen volledig en kaal.
+- **De opzet bleek zwak.** Beide varianten reproduceerden 8-9% van het origineel letterlijk, terwijl de briefs geen formuleringen bevatten: het model kent de verhalen, of de brief dwingt de zin af. De rechter haalde bovendien zelfs echt-tegen-oud-AI niet door de eigen regel. Les: navertellen van gepubliceerd werk meet deels reproductie, geen stijl.
+
+### Meting 2 — herhaalde armen-meting: eigen premisse, drie armen, twee modellen
+
+De opdracht noemt alleen het dier. 12 dieren × 3 opzetten × 2 modellen × 3 concepten = 216 verhalen. Twee maten: de *afstand tot het corpus-profiel* uit fase 3, en een nieuwe *detector* die echt van AI probeert te scheiden (diernamen gemaskeerd; d′ = scheiding in sd-eenheden, 0 = niet te onderscheiden).
+
+| model | opzet | afstand tot profiel (MFW / char3) | detecteerbaarheid d′ (MFW / char3) |
+|---|---|---|---|
+| Opus 5.5 | volledige agent | 0,800 / 0,871 | 4,60 / 6,08 |
+| | kale variant | 0,811 / 0,878 | 4,43 / 5,56 |
+| | geen gids | 0,866 / 0,901 | **2,64 / 3,40** |
+| Fable 5.2 | volledige agent | 0,815 / 0,895 | 5,21 / 5,93 |
+| | kale variant | 0,858 / 0,912 | 6,09 / 6,77 |
+| | geen gids | 0,837 / 0,873 | **2,92 / 3,34** |
+| *echt (46 verhalen)* | | 0,834 / 0,848 | *echt-tegen-echt: −0,8 tot +0,6* |
+
+- **Volledige agent tegen kale variant: geen aantoonbaar verschil**, op geen van beide modellen (de volledige ligt nominaal iets voor).
+- **Niets is ononderscheidbaar.** De detector scheidt elke opzet vrijwel perfect van echte Tellegen (AUC ≥0,97).
+- **De gids maakt de tekst makkelijker te detecteren dan geen gids** (p<0,001 op beide maten en beide modellen). Verhalen met gids lijken sterker op elkaar dan verhalen zonder gids, en veel sterker dan Tellegens verhalen onderling; hun gemiddelde ligt niet dichter bij Tellegen.
+- **De register-constraints schieten door.** Ze corrigeren tics van Opus 4.8 (te veel *was*, *niet* en komma's). Opus 5.5 en Fable 5.2 hebben die tics nauwelijks nog en komen met de constraints aan de andere kant uit: te weinig *was*, *niet* en komma's, te veel *op* en *uit*.
+- **De afstandsmaat uit fase 3 was te mild.** Hij beloont gelijkmatigheid. De constrained-teksten die er in fase 3 "binnen het Tellegen-bereik" op vielen, scheidt de detector met AUC 0,97.
+- **Fable 5.2 ligt niet dichter bij Tellegen dan Opus 5.5.** Onder de kale gids ligt het verder; zonder gids nominaal iets dichterbij (niet significant).
+- **Nieuwe tells, in alle opzetten:** zinnen van 9-10 woorden tegen 12,4 bij Tellegen, en bijna geen uitroeptekens, dubbele punten of beletseltekens.
+
+**Dichtst bij Tellegen op de scherpste maat:** geen gids, op Fable 5.2 of Opus 5.5 (onderling niet te onderscheiden).
+
+**Voorbehoud.** De detector is nieuw en alleen met twee controles gevalideerd (echt-tegen-echt rond 0,5; oude AI-teksten 0,95-1,00); zijn uitslag was vooraf als secundair vastgelegd. Eén auteur, twaalf dieren, twee modellen, eigen harness. Dit meet de statistische vingerafdruk. **Leesindruk is in fase 4 niet gemeten**, en daar was de premisse-eerst-motor op afgesteld.
+
+---
+
+## 11. TL;DR — geïntegreerde, objectieve conclusie (alle fases samen)
 
 Bekijk je niet elke fase apart maar het geheel, dan verschuift de eerlijke conclusie weg van een rapportcijfer.
 
@@ -241,19 +282,23 @@ Die *ordening* is informatief; de bijbehorende *absolute getallen* niet.
 
 **Wat een stylometrische pilot daarna toevoegde.** Een lokale harness (MFW-Delta + held-out char-3-gram-Delta) gaf het antwoord op de open vraag: premisse-eerst verkleint de stilistische afstand tot Tellegen **niet** (0,850 vs 0,869 voor thema-eerst); het voordeel zat alleen in de leesindruk. Modus-onafhankelijke tells blijven, en per-tekst-surgery/best-of-N sluiten de gap niet. **Wat de gap (op onze twee families) wél sloot:** de systematische tells als **constraints in de agent** zetten — dat bracht de baseline binnen het Tellegen-bereik, inclusief de held-out char-3-gram (RESULTS §9). De balans: systematisch → constraint, idiosyncratisch → hooguit één surgical pass. Dit blijft een pilot (2 families, kleine n, geen getrainde classifier, geen menselijke raters) — geen vervanging van het volledige ontwerp in [PROTOCOL.md](analyses/refinement/PROTOCOL.md).
 
+**Wat fase 4 daarop corrigeert.** Met een getrainde detector en de nieuwste modellen (sectie 10) blijkt "binnen het Tellegen-bereik" een eigenschap van de milde afstandsmaat, niet van de tekst: elke opzet is vrijwel perfect van echt te scheiden. De constraints golden voor het model waarvan ze waren afgeleid (Opus 4.8); op Opus 5.5 en Fable 5.2 schieten ze door en maken ze de tekst uniformer en beter detecteerbaar dan zonder gids. De volledige agent van 429 regels doet het op deze maten niet aantoonbaar beter dan 30 regels.
+
 **De zuivere bottom line (met balans optimisme/terughoudendheid).**
-- *Wat werkt (gefundeerd, behouden in het proces):* (1) **premisse-eerst** generatie verbetert de *leesindruk* sterk; (2) **systematische tells als constraints in de agent** brengen de *stylometrische* afstand (MFW + held-out char-3-gram) binnen het Tellegen-bereik — reproduceerbaar en confound-gecontroleerd; (3) één **data-gedreven surgical pass** ruimt het idiosyncratische residu op. Samen: constraints doen het zware werk, premisse-eerst de toon, surgery de rest.
+- *Wat werkt (gefundeerd, behouden in het proces):* (1) **premisse-eerst** generatie verbetert de *leesindruk* sterk; (2) **systematische tells als constraints in de agent** brachten in fase 3 de *stylometrische* afstand (MFW + held-out char-3-gram) binnen het Tellegen-bereik — maar alleen op die afstandsmaat en alleen voor Opus 4.8; (3) één **data-gedreven surgical pass** ruimt het idiosyncratische residu op.
+- *Wat fase 4 leert (nieuw):* een constraint die een model-tic corrigeert, **veroudert met het model**. Op Opus 5.5 en Fable 5.2 komt "geen gids" op de scherpste maat het dichtst bij Tellegen; constraints moeten per model opnieuw worden afgeleid of geschrapt. Of de premisse-eerst-motor zijn voordeel in *leesindruk* op deze modellen houdt, is niet opnieuw gemeten.
 - *Wat niet werkt (geschrapt):* oppervlakte-woordchirurgie, iteratief doorpoetsen, en best-of-N-selectie — die gamen één metriek zonder transfer.
-- *Terughoudendheid (meer empirisch werk nodig):* dit is gemeten op twee feature-families met onze eigen harness, kleine n, één auteur, en met een LLM-jury die aantoonbaar onbetrouwbaar is. "Binnen ons stylometrische bereik én overtuigend voor een LLM-panel" is **niet** hetzelfde als "ononderscheidbaar voor een getrainde stylometrische classifier of voor menselijke experts". Die generieke claim vergt het ontwerp in [PROTOCOL.md](analyses/refinement/PROTOCOL.md) (menselijke raters, niet-circulaire/getrainde detector, controle-items, meer auteurs, pre-registratie). De wetenschappelijk best onderbouwde gap-sluiter blijft **fine-tunen op het oeuvre** (modelniveau, auteursrechtelijk gated) — buiten dit proces.
+- *Terughoudendheid (meer empirisch werk nodig):* dit is gemeten op twee feature-families met onze eigen harness (in fase 4 aangevuld met een eigen, beperkt gevalideerde detector), kleine n, één auteur, en met een LLM-jury die aantoonbaar onbetrouwbaar is. "Binnen ons stylometrische bereik én overtuigend voor een LLM-panel" is **niet** hetzelfde als "ononderscheidbaar voor een getrainde stylometrische classifier of voor menselijke experts". Die generieke claim vergt het ontwerp in [PROTOCOL.md](analyses/refinement/PROTOCOL.md) (menselijke raters, niet-circulaire/getrainde detector, controle-items, meer auteurs, pre-registratie). De wetenschappelijk best onderbouwde gap-sluiter blijft **fine-tunen op het oeuvre** (modelniveau, auteursrechtelijk gated) — buiten dit proces.
 
 ---
 
-## 11. Bronnen
+## 12. Bronnen
 
 - Beyond the surface: stylometric analysis of GPT-4o's capacity for literary style imitation — *Digital Scholarship in the Humanities* 40(2) 2025 — https://academic.oup.com/dsh/article/40/2/587/8118784
 - Catch Me If You Can? Not Yet: LLMs Still Struggle to Imitate the Implicit Writing Styles of Everyday Authors — EMNLP Findings 2025 / arXiv 2509.14543 — https://arxiv.org/html/2509.14543v1
 - Antislop: A Comprehensive Framework for Identifying and Eliminating Repetitive Patterns in Language Models — ICLR 2026 / arXiv 2510.15061 — https://arxiv.org/abs/2510.15061
 - Detecting authorship between generative AI models and humans: a Burrows's Delta approach — *Digital Scholarship in the Humanities* 40(3) 2025 — https://academic.oup.com/dsh/article-abstract/40/3/1064/8161203
+- Mike Taylor, experiment met stijlgidsen en een gold-triad-rechter — *Every*, november 2026 *(aanleiding voor fase 4; geen link opgenomen)*
 - EQ-Bench Creative Writing Leaderboard 2026 (Claude Opus 4.7 — Elo 2216 / april 2026) — https://awesomeagents.ai/leaderboards/creative-writing-llm-leaderboard/
 
 **Aanvullende literatuurscan (fase 3):**
