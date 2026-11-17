@@ -30,3 +30,4 @@ analyses/**/*.pdf
 analyses/**/raw/real_*.txt
 analyses/**/panel*/
 analyses/**/*_blind/
+analyses/**/raw/gold_*.txt

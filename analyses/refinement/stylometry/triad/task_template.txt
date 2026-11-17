@@ -1,0 +1,9 @@
+Schrijf een dierenverhaal in de stijl van Toon Tellegen op basis van de inhoudsbrief hieronder.
+
+- Volg de brief: dezelfde dieren, dezelfde premisse, dezelfde volgorde van gebeurtenissen en dezelfde gespreksonderwerpen. De formulering is helemaal aan jou.
+- Lengte: ongeveer {N} woorden (niet minder dan {LO}, niet meer dan {HI}).
+- Geef uitsluitend de verhaaltekst als platte tekst: geen titel, geen toelichting vooraf of achteraf, geen Markdown of andere opmaak. Zet dialoog tussen enkele aanhalingstekens.
+
+INHOUDSBRIEF
+
+{BRIEF}
