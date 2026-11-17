@@ -91,3 +91,19 @@ Iteratieve, data-gedreven surgery helpt één pas (mees: char3 1,140→1,016) en
 
 ## 11. Model-vergelijking (4.8 / 4.6 / 4.5 / Codex) — meetbare indruk
 Zelfde taak + constraints, alleen schrijfmodel gevarieerd, N=4/model (4.7 niet beschikbaar). Op de held-out char-3-gram: **Opus 4.8 0,906** (binnen echt bereik) < Codex 1,051 < Haiku 4.5 1,105 < Sonnet 4.6 1,117; op MFW zijn 4.8≈4.6, Codex daarachter, Haiku verst. Dit is de eerste gemeten basis voor de eerder onbewezen "modelbijdrage": 4.8 ligt het dichtst bij de doelstijl op de scherpste vingerafdruk. Codex levert in deze proef geen verbetering t.o.v. Opus 4.8, maar zit op char3 wel vóór Sonnet/Haiku. Voorbehoud: klein (N=4, 2 families, 1 auteur, eigen harness, constraints deels van 4.8-data afgeleid); Codex is bovendien niet blind gemeten omdat schrijver en analistcontext samenvielen. Indruk, geen ranglijst-bewijs.
+
+## 12. Volledige agent, kale variant of geen gids — op Opus 5.5 en Fable 5.2 (RESULTS §11-12; corrigeert §10)
+Twee metingen op 2026-11-17, beide met een vooraf vastgelegde beslisregel.
+
+**Gold-triad (RESULTS §11).** Twaalf echte verhalen naverteld uit een inhoudsbrief, één concept per arm. Geen aantoonbaar verschil tussen de volledige agent en een kale variant (alleen premisse-eerst, temporeel register en register-constraints). De opzet bleek zwak: beide armen reproduceerden 8-9% van het origineel letterlijk, terwijl de briefs schoon waren, en de rechter haalde zelfs echt-tegen-oud-AI niet door de eigen regel.
+
+**Herhaalde armen-meting (RESULTS §12).** Eigen premisse, 12 dieren, 3 concepten per cel, een derde arm zonder gids, twee modellen (216 concepten).
+- **Volledig tegen kaal: geen aantoonbaar verschil**, op geen van beide modellen.
+- **Een getrainde detector scheidt elke arm vrijwel perfect van echt** (AUC ≥0,97), ook de constrained-teksten uit §10 die op de afstandsmaat "binnen het Tellegen-bereik" vielen. Die afstandsmaat beloont gelijkmatigheid en was te mild.
+- **De gids maakt de tekst makkelijker te detecteren dan geen gids** (d′ 4,4-6,8 tegen 2,6-3,4; p<0,001 op beide families en beide modellen). Teksten met gids zijn onderling uniformer en hun gemiddelde ligt niet dichter bij Tellegen.
+- **De register-constraints schieten op deze modellen door.** Ze zijn afgeleid van Opus 4.8. Opus 5.5 en Fable 5.2 hebben de oorspronkelijke afwijking nauwelijks nog, en komen met de constraints aan de andere kant uit (te weinig `was`, `niet` en komma's; te veel `op` en `uit`).
+- **Fable ligt niet dichter bij Tellegen dan Opus.**
+
+**Wat dit corrigeert.** §10 noemde constraints-in-de-agent de sterkste positieve hefboom. Dat hield alleen op de afstandsmaat en alleen voor het model waarop ze waren afgeleid. Een constraint die een model-tic corrigeert, veroudert met het model.
+
+**Terughoudendheid.** De detector is nieuw en alleen met twee controles gevalideerd; zijn uitslag was secundair vastgelegd. Eén auteur, twee modellen, eigen harness. Leesindruk is niet gemeten: de premisse-motor is daarop afgesteld en kan dus nog steeds zijn werk doen.
