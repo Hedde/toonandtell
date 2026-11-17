@@ -168,7 +168,7 @@ Rechter: `triad.py` (afstand tot het gold, MFW + char3). Opzet en beslisregel zi
 
 *Gold-echo = aandeel van de woorden van het concept dat in een letterlijke reeks van ≥8 woorden uit het eigen gold valt (`triad/gold_echo.py`).*
 
-**Winstpercentages.** MFW: A wint 4/12 (33%), B 8/12, p=0,388. char3: A wint 2/12 (17%), B 10/12, **p=0,039**. Beide families eens: A 1, B 7, verdeeld 4. Gemiddelde afstand tot het gold: MFW A 0,566 / B 0,549; char3 A 0,673 / B 0,637. Vier (MFW) en drie (char3) triades zijn beslist met een marge <0,01.
+**Winstpercentages.** MFW: A wint 4/12 (33%), B 8/12, p=0,388. char3: A wint 2/12 (17%), B 10/12, **p=0,039**. Beide families eens: A 1, B 7, verdeeld 4. Gemiddelde afstand tot het gold: MFW A 0,566 / B 0,549; char3 A 0,673 / B 0,637. Vier (MFW) en drie (char3) triades zijn beslist met een marge <0,01. De p van 0,039 is fragiel; zie de zelftoets onderaan.
 
 **Afstand tot het corpus-profiel (`measure.py`, gemiddeld over 12):**
 
@@ -197,4 +197,30 @@ A ligt dichter bij het profiel dan B in 6/12 (MFW) en 7/12 (char3) paren. Beide 
 
 **Uitkomst.** Geen aantoonbaar verschil volgens de vooraf vastgelegde regel: de kale variant won op char3 10/12 (p=0,039) maar op MFW slechts 8/12 (p=0,388), dus de volledige agent schrijft op deze maten niet aantoonbaar dichter bij Tellegen dan de kale.
 
-**Vervolgvoorstel (niet uitgevoerd).** (1) Gold dat het model niet kan kennen, of grovere briefs (premisse plus drie stappen), zodat de echo verdwijnt. (2) Meerdere concepten per cel om de variatie binnen een arm te schatten. (3) Een arm "geen gids" en een tweede model, zoals bij Taylor/Every. (4) Heranalyse met de letterlijke reeksen gemaskeerd. (5) Meer triades (n≥30) of een toets op de marges in plaats van alleen het teken. (6) De tie-break in `triad.py` en `measure.py` gelijktrekken.
+**Vervolgvoorstel (niet uitgevoerd).** (1) Gold dat het model niet kan kennen, of grovere briefs (premisse plus drie stappen), zodat de echo verdwijnt. (2) Meerdere concepten per cel om de variatie binnen een arm te schatten. (3) Een arm "geen gids" en een tweede model, zoals bij Taylor/Every. (4) Arm B zonder de opmaakregels uit het user-bericht. (5) Dezelfde A/B-vergelijking op een taak met eigen premisse, beoordeeld door lezers. (6) Meer triades (n≥30) of een toets op de marges in plaats van alleen het teken. (7) De tie-break in `triad.py` en `measure.py` gelijktrekken.
+
+### Zelftoets: is "de volledige agent helpt niet" een artefact van onze eigen opzet?
+
+*Post hoc en verkennend, op bestaande teksten (`triad/selfcheck.py`). Verandert de beslisregel en de uitkomst niet.*
+
+**Wat het cijfer opblies (eigen toedoen).** De enige p onder 0,05 in deze sectie hangt aan de lengtepoort, die ik zelf heb toegevoegd. Met de eerste poging van elke cel wint B op char3 9/12 (p=0,146) in plaats van 10/12; triade 04 slaat om op een marge van 0,008. Met de gold-echo gemaskeerd is het ook 9/12. Lees de char3-uitslag dus als "9 à 10 van 12", niet als p=0,039.
+
+**Wat het resultaat níét verklaart.**
+
+| mogelijke vertekening | toets | uitkomst |
+|---|---|---|
+| lengte (A is langer) | verband lengteverschil ↔ afstandsverschil; alleen lengte-gelijke triades | geen stabiel verband (MFW r=+0,63, zonder triade 10 −0,17); in 9 lengte-gelijke triades wint B char3 7–2, MFW 6–3 |
+| gold-echo | letterlijke reeksen uit beide concepten geknipt | richting gelijk: char3 B 9–3, MFW B 8–4; gem. afstand A 0,625/0,731, B 0,609/0,699 |
+| de prompt verbiedt woorden die in het gold staan | tellingen gold / A / B | verwaarloosbaar: `thee` 2/2/2, `drempel` 1/2/4, `verdween` 3/0/2 |
+| typografie | aandeel leesteken-trigrammen in het char3-verschil | 18% (0,006 van 0,036); de rest is verspreid over 272 letter-trigrammen |
+
+**Ruis.** Acht afgekeurde pogingen geven een tweede concept van dezelfde arm op dezelfde brief (6×A, 2×B, alle >15% te lang). Op MFW is het verschil binnen een arm (mediaan 0,039) even groot als tussen de armen (0,034): de MFW-uitslag draagt geen informatie. Op char3 is het verschil tussen de armen (mediaan 0,037) ruwweg vier keer zo groot als binnen een arm (0,009; gem. 0,017); van de 9 triades met een marge boven die ruisvloer wint B er 8. De char3-richting is dus waarschijnlijk geen toeval, al rust de ruisschatting op acht paren.
+
+**Wat de opzet niet kán zien (het werkelijke risico).**
+- *De maatlat is die van arm B.* De register-constraints zijn in §9 afgeleid van precies deze twee families. De overige regels van de prompt zijn afgesteld op leesindruk in de blindtests. Dat ze MFW en char3 niet verder bewegen, is bijna per constructie zo.
+- *De brief schakelt de rest van de prompt uit.* Premisse, verloop en slot liggen vast, en de briefs zijn door mijn instructie uitputtend. Waar de volledige agent voor bedoeld is, kan niet meedoen.
+- *"Dichter bij het gold" is niet "dichter bij Tellegen".* Op het corpus-profiel zijn de armen gelijk. B hergebruikt iets meer van het gold-vocabulaire (56,5% tegen 53,7% van de inhoudswoorden; A hoger in 4/12). De maat straft dus afwijken van het origineel, en daar stuurt de volledige prompt juist op.
+- *Het user-bericht gaf B een deel van de gids cadeau:* geen titel, geen opmaak, enkele aanhalingstekens, doellengte. Dat verkleint het gat tussen de armen; hoeveel is niet getoetst.
+- *Ander model dan waarop de prompt is afgesteld* (Opus 5.5 in plaats van 4.8).
+
+**Oordeel.** "De volledige agent schrijft slechter" is niet gedekt: dat zou een vals signaal zijn, gebouwd op een fragiele p en op een maat die origineel-trouw beloont. "De volledige agent schrijft op deze maten niet dichterbij" blijft staan; geen enkele toets zette A voor. Verder reikt het niet: over de verbetering waarvoor de gids is gemaakt (premisse, opbouw, leesindruk) zegt deze meting niets.
