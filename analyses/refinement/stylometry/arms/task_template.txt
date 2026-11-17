@@ -1,0 +1,4 @@
+Schrijf een dierenverhaal in de stijl van Toon Tellegen met de {DIER} als hoofdfiguur.
+
+- Lengte: ongeveer 450 woorden (niet minder dan 420, niet meer dan 500).
+- Geef uitsluitend de verhaaltekst als platte tekst: geen titel, geen toelichting vooraf of achteraf, geen Markdown of andere opmaak. Zet dialoog tussen enkele aanhalingstekens.
