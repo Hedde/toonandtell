@@ -223,4 +223,89 @@ A ligt dichter bij het profiel dan B in 6/12 (MFW) en 7/12 (char3) paren. Beide 
 - *Het user-bericht gaf B een deel van de gids cadeau:* geen titel, geen opmaak, enkele aanhalingstekens, doellengte. Dat verkleint het gat tussen de armen; hoeveel is niet getoetst.
 - *Ander model dan waarop de prompt is afgesteld* (Opus 5.5 in plaats van 4.8).
 
-**Oordeel.** "De volledige agent schrijft slechter" is niet gedekt: dat zou een vals signaal zijn, gebouwd op een fragiele p en op een maat die origineel-trouw beloont. "De volledige agent schrijft op deze maten niet dichterbij" blijft staan; geen enkele toets zette A voor. Verder reikt het niet: over de verbetering waarvoor de gids is gemaakt (premisse, opbouw, leesindruk) zegt deze meting niets.
+**Oordeel.** "De volledige agent schrijft slechter" is niet gedekt: dat zou een vals signaal zijn, gebouwd op een fragiele p en op een maat die origineel-trouw beloont. "De volledige agent schrijft op deze maten niet dichterbij" blijft staan; geen enkele toets zette A voor. Verder reikt het niet: over de verbetering waarvoor de gids is gemaakt (premisse, opbouw, leesindruk) zegt deze meting niets. §12 herhaalt de vergelijking zonder deze zwaktes.
+
+---
+
+## 12. Herhaalde armen-meting: volledige agent, kale variant en geen gids, op Opus 5.5 en Fable 5.2
+
+**Datum:** 2026-11-17. **Vraag:** dezelfde als §11, nu zonder de drie zwaktes van die opzet (één concept per cel, een maat die origineel-trouw beloont, een taak die de gids uitschakelt), en met een arm zonder gids als anker.
+
+**Opzet.** Eigen premisse: de opdracht noemt alleen het dier, de doellengte (450 woorden) en de opmaak. 12 dieren (de eerste twaalf uit de cast van de agent-prompt) × 3 armen × 2 modellen × 3 concepten = 216 concepten, elk in een schone context (`arms/generate.py`). **A** = volledige agent, **B** = kale variant (als §11), **C** = geen gids (system prompt: "Je bent een schrijfagent.").
+Geen lengtepoort en geen selectie. Elke tekst is afgekapt op de eerste ≥400 woorden; echte vergelijkingseenheden zijn de 46 Tellegen-verhalen van ≥400 woorden, op dezelfde manier afgekapt.
+Twee maten (`arms/analyse.py`): **maat 1** = MFW- en char3-afstand tot het corpus-profiel uit het ongewijzigde `measure.py`; **maat 2** = detecteerbaarheid: een twee-centroïden-classifier echt-tegen-arm, gekruist gevalideerd per dier, diernamen gemaskeerd. Opzet en beslisregel zijn gecommit vóór het eerste concept (`b27dae9`).
+
+**Beslisregel (vooraf).** Primair per model A tegen B op maat 1: alleen een bevinding als beide families in dezelfde richting verschillen met exacte gepaarde permutatietoets p<0,05. Maat 2, de vergelijkingen met C en Opus-tegen-Fable zijn secundair.
+
+**Instrument-check van maat 2 (vooraf).** Echt tegen echt: AUC 0,31–0,65 (rond 0,5; d′ −0,8 tot +0,6). Oude AI-teksten uit deze repo tegen echt: AUC 0,95–1,00 (d′ 2,5–3,9). Dat geldt ook voor de constrained- en Opus-4.8-teksten uit §9/§10 (AUC 0,97), die op maat 1 "binnen het echte bereik" vielen.
+
+### Gemeten
+
+**Maat 1: afstand tot het corpus-profiel** (lager = dichterbij; gemiddelde over 36 concepten per cel).
+
+| model | arm | MFW | char3 | komma/100 | TTR | sd binnen cel (MFW / char3) |
+|---|---|---|---|---|---|---|
+| Opus 5.5 | A volledige agent | 0,800 | 0,871 | 4,3 | 0,49 | 0,039 / 0,034 |
+| | B kale variant | 0,811 | 0,878 | 3,4 | 0,51 | 0,052 / 0,054 |
+| | C geen gids | 0,866 | 0,901 | 5,6 | 0,45 | 0,056 / 0,071 |
+| Fable 5.2 | A volledige agent | 0,815 | 0,895 | 3,8 | 0,50 | 0,056 / 0,049 |
+| | B kale variant | 0,858 | 0,912 | 3,9 | 0,53 | 0,047 / 0,048 |
+| | C geen gids | 0,837 | 0,873 | 6,4 | 0,47 | 0,053 / 0,045 |
+| echt (46 verhalen) | | 0,834 (0,68–1,07) | 0,848 (0,74–1,07) | 5,5 | 0,48 | |
+
+**Gepaard per dier** (gemiddeld verschil; hoe vaak de eerstgenoemde dichterbij ligt; p):
+
+| vergelijking | Opus MFW | Opus char3 | Fable MFW | Fable char3 |
+|---|---|---|---|---|
+| **A − B (primair)** | −0,011 (9/12; p=0,392) | −0,007 (5/12; p=0,619) | −0,044 (9/12; p=0,032) | −0,017 (9/12; p=0,226) |
+| A − C | −0,066 (10/12; p=0,012) | −0,031 (8/12; p=0,123) | −0,022 (7/12; p=0,273) | +0,022 (6/12; p=0,166) |
+| B − C | −0,055 (10/12; p=0,002) | −0,023 (8/12; p=0,333) | +0,021 (5/12; p=0,180) | +0,038 (2/12; p=0,005) |
+
+**Maat 2: detecteerbaarheid** (AUC 0,5 = niet van echt te onderscheiden; d′ = scheiding in sd-eenheden).
+
+| model | familie | AUC A / B / C | d′ A / B / C | d′ A−B | d′ A−C | d′ B−C |
+|---|---|---|---|---|---|---|
+| Opus 5.5 | MFW | 1,000 / 1,000 / 0,978 | 4,60 / 4,43 / 2,64 | +0,17 (p=0,673) | +1,96 (p<0,001) | +1,78 (p<0,001) |
+| | char3 | 1,000 / 1,000 / 0,992 | 6,08 / 5,56 / 3,40 | +0,52 (p=0,349) | +2,69 (p<0,001) | +2,16 (p<0,001) |
+| Fable 5.2 | MFW | 0,999 / 1,000 / 0,972 | 5,21 / 6,09 / 2,92 | −0,88 (p=0,033) | +2,29 (p<0,001) | +3,17 (p<0,001) |
+| | char3 | 0,999 / 1,000 / 0,988 | 5,93 / 6,77 / 3,34 | −0,84 (p=0,217) | +2,59 (p<0,001) | +3,43 (p<0,001) |
+
+**Opus tegen Fable per arm** (maat 1, gepaard; positief = Opus dichterbij): arm A MFW +0,015 (p=0,359), char3 +0,024 (p=0,122); arm B +0,047 (p=0,008), +0,033 (p=0,006); arm C −0,029 (p=0,146), −0,028 (p=0,156).
+
+**Controles.** Lengte 423–536 woorden (gemiddeld 461–496 per cel), dus elke tekst is op 400 afgekapt. Geen dubbele aanhalingstekens, geen opmaak, geen mislukte aanroepen. Verbatim-overlap: 15 gedeelde reeksen van 8–10 woorden in 216 concepten, alle op het niveau van stockfrasen (bijvoorbeeld een standaardopening met "op een ochtend … wakker"); nul in Opus A en B.
+
+**Verklarende uitsplitsing** (post hoc, beschrijvend; `arms/explain.py`). De scheiding van maat 2 valt uiteen in *verschuiving* (hoe ver het gemiddelde van de arm van het gemiddelde van echt ligt) en *spreiding* (hoe ver teksten van hun eigen groepsgemiddelde liggen).
+
+| groep | verschuiving MFW / char3 | spreiding MFW / char3 |
+|---|---|---|
+| echt | – | 0,831 / 0,846 |
+| Opus A / B / C | 0,460 / 0,504 / 0,455 en 0,512 / 0,537 / 0,489 | 0,611 / 0,606 / 0,723 en 0,722 / 0,726 / 0,763 |
+| Fable A / B / C | 0,508 / 0,613 / 0,415 en 0,556 / 0,648 / 0,424 | 0,600 / 0,545 / 0,715 en 0,724 / 0,699 / 0,752 |
+
+De woorden waarop de register-constraints sturen (z van de arm min z van echt; 0 = als Tellegen):
+
+| | was | niet | dan | nu | in | uit | op | zijn |
+|---|---|---|---|---|---|---|---|---|
+| Opus C (geen gids) | +0,2 | +0,8 | +0,8 | −0,3 | −1,1 | −0,7 | −0,1 | −0,6 |
+| Opus B | −1,7 | −1,1 | −0,2 | −0,5 | +0,9 | +0,6 | +1,4 | +0,8 |
+| Opus A | −0,6 | −0,4 | +0,1 | −0,4 | +0,3 | −0,2 | +1,2 | +0,3 |
+| Fable C (geen gids) | +0,1 | +0,7 | +0,8 | +0,2 | −0,8 | −0,8 | +0,1 | −0,5 |
+| Fable B | −2,1 | −1,4 | −0,7 | −0,8 | +0,4 | +2,0 | +1,7 | +1,1 |
+| Fable A | −1,4 | −0,9 | −0,4 | −0,7 | +0,2 | +0,3 | +1,5 | +0,8 |
+
+Komma's (zie de tabel bij maat 1): zonder gids 5,6 en 6,4, dicht bij Tellegen; met gids 3,4–4,3. In álle armen: gemiddelde zinslengte 9,0–10,1 woorden tegen 12,4 bij Tellegen, en bijna geen uitroeptekens (0,03–0,20 tegen 0,60), dubbele punten (0,05–0,31 tegen 0,67) of beletseltekens (0,01–0,06 tegen 0,51).
+
+### Afgeleid
+
+- **Volledige agent tegen kale variant: geen aantoonbaar verschil, op geen van beide modellen.** De richting is nu wel overal in het voordeel van de volledige agent (beide families, beide modellen), omgekeerd aan §11. De richting van §11 was dus een artefact van het navertellen. Op Fable haalt alleen MFW de drempel (p=0,032).
+- **Elke arm is voor een getrainde detector vrijwel perfect van echt te scheiden** (AUC ≥0,97). Geen van de configuraties komt in de buurt van ononderscheidbaar.
+- **De gids maakt de tekst makkelijker te detecteren, niet moeilijker.** Op beide modellen en beide families is de scheiding met gids groter dan zonder (d′ 4,4–6,8 tegen 2,6–3,4; alle acht toetsen p<0,001). De uitsplitsing laat zien waarom: teksten met gids zijn onderling uniformer (spreiding 0,55–0,61 tegen 0,72 zonder gids en 0,83 bij Tellegen), en hun gemiddelde ligt niet dichter bij dat van Tellegen.
+- **De twee maten wijzen op Opus in tegengestelde richting, en maat 1 is de zwakkere.** Maat 1 meet hoe ver één tekst van het gemiddelde ligt en beloont daarmee gelijkmatigheid. Een uniforme arm scoort er goed op zonder dat zijn gemiddelde dichterbij komt. De claim uit §9 ("constraints brengen de baseline binnen het echte bereik") houdt daarom alleen op maat 1 stand.
+- **De register-constraints schieten op deze modellen door.** Zonder gids zit `was` al op Tellegens niveau en wijken `niet`, `dan`, `in` en `uit` ongeveer één sd of minder af. Met de constraints klappen ze om naar de andere kant: te weinig `was` en `niet`, te veel `op` en `uit`, te weinig komma's. De constraints zijn afgeleid van Opus 4.8 (§9). In de volledige prompt is de doorschot kleiner dan in de kale, wat de lichte voorsprong van A op B kan verklaren.
+- **Fable ligt niet dichter bij Tellegen dan Opus.** Onder de kale gids ligt Fable verder (beide families p<0,01) en schiet het sterker door; zonder gids ligt het nominaal iets dichterbij (niet significant).
+
+**Terughoudendheid.** Maat 2 is nieuw en alleen gevalideerd met de twee controles hierboven; hij traint op voorbeelden van de arm zelf en is dus een strenge tegenstander. AUC zit voor A en B op het plafond, het onderscheid rust op d′. Naast de primaire toets zijn er ruim veertig secundaire; de acht d′-toetsen tegen C (p<0,001) overleven elke correctie, de losse p-waarden rond 0,03 niet. Eén auteur, 12 dieren, twee modellen, eigen harness. De echte eenheden zitten ook in het referentiecorpus. Het user-bericht gaf alle armen dezelfde opmaakregels. Leesindruk en de kwaliteit van de premisse zijn niet gemeten; daarvoor is de gids oorspronkelijk gemaakt.
+
+**Uitkomst.** Geen aantoonbaar verschil tussen de volledige agent en de kale variant op Opus 5.5 of Fable 5.2; wel maken beide gidsen de tekst op beide modellen uniformer en daardoor beter detecteerbaar dan zonder gids, omdat de register-constraints op deze modellen doorschieten.
+
+**Vervolgvoorstel (niet uitgevoerd).** (1) De register-constraints schrappen of per model opnieuw afleiden uit de arm zonder gids, en opnieuw meten. (2) De overige tells die in alle armen terugkomen (zinslengte, uitroeptekens, dubbele punten, beletseltekens) als kandidaat-constraints toetsen. (3) A tegen C laten beoordelen door lezers, omdat de premisse-motor op leesindruk is afgesteld. (4) Maat 2 valideren op een tweede auteur.
